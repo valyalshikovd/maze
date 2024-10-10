@@ -3,33 +3,22 @@ package backend.academy.labirinth.labirinth.growingThreeGenerator;
 import backend.academy.labirinth.exception.InvalidInputOutputCoords;
 import backend.academy.labirinth.labirinth.Cell;
 import backend.academy.labirinth.labirinth.Coordinate;
+import backend.academy.labirinth.labirinth.GeneratorWithNeighborManager;
 import backend.academy.labirinth.labirinth.Maze;
 import backend.academy.labirinth.util.RandomShell;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public final class GrowingThreeMazeState {
+public final class GrowingThreeMazeState extends GeneratorWithNeighborManager {
 
-    private final int Ysize;
-    private final int Xsize;
-    private final Coordinate input;
-    private Coordinate output;
-    private final RandomShell random;
-    private final List<Coordinate> activeCoords = new ArrayList<>();
-    private final Cell[][] maze;
 
 
     public GrowingThreeMazeState(int height, int width, Coordinate input, Coordinate output, RandomShell random) {
-        this.Ysize = reductionToOdd(height);
-        this.Xsize = reductionToOdd(width);
-        this.input = input;
-        this.output = output;
-        this.random = random;
-        this.maze = new Cell[Ysize][Xsize];
+        super(reductionToOdd(height), reductionToOdd(width), input, output, random);
     }
 
-    private int reductionToOdd (int val){
+    private static int reductionToOdd (int val){
         if (val % 2 == 0){
              val --;
         }
@@ -109,47 +98,5 @@ public final class GrowingThreeMazeState {
     }
 
 
-    private class NeighborManager{
-        private final List<Coordinate> neighbors = new ArrayList<>();
-        private final Coordinate currentCoord;
 
-        public NeighborManager(Coordinate currentCoord) {
-            this.currentCoord = currentCoord;
-            addCoordsToPoolActiveCoords(new Coordinate(currentCoord.X() + 2, currentCoord.Y()));
-            addCoordsToPoolActiveCoords(new Coordinate(currentCoord.X(), currentCoord.Y() + 2));
-            addCoordsToPoolActiveCoords(new Coordinate(currentCoord.X() - 2, currentCoord.Y()));
-            addCoordsToPoolActiveCoords(new Coordinate(currentCoord.X(), currentCoord.Y() - 2));
-
-        }
-
-        private void addCoordsToPoolActiveCoords(Coordinate coord){
-            if(validateCoordsToPoolNeighbourCoords(coord)){
-                neighbors.add(coord);
-            }
-        }
-
-        private Coordinate brakeWall(){
-            if(neighbors.isEmpty()){
-                return null;
-            }
-            Coordinate res = neighbors.get(random.get(neighbors.size()));
-            if(res.Y() > currentCoord.Y()){
-                maze[currentCoord.Y() + 1][currentCoord.X()] = new Cell(Cell.Type.PASSAGE);
-                return res;
-            }
-            if(res.Y() < currentCoord.Y()){
-                maze[currentCoord.Y() - 1][currentCoord.X()] = new Cell(Cell.Type.PASSAGE);
-                return res;
-            }
-            if(res.X() > currentCoord.X()){
-                maze[currentCoord.Y()][currentCoord.X()  +1] = new Cell(Cell.Type.PASSAGE);
-                return res;
-            }
-            if(res.X() < currentCoord.X()){
-                maze[currentCoord.Y()][currentCoord.X() - 1] = new Cell(Cell.Type.PASSAGE);
-                return res;
-            }
-            return null;
-        }
-    }
 }

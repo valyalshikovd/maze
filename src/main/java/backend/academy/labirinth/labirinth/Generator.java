@@ -19,9 +19,9 @@ public interface Generator {
     }
 
     Maze generate(int height, int width);
-    Maze generate(int height, int width, Side sideInput);
-    Maze generate(int height, int width, Side sideInput, int coordInput);
-    Maze generate(int height, int width, Side sideInput, int coordInput, Side sideOutput);
-    Maze generate(int height, int width, Side sideInput, int coordInput, Side sideOutput, int coordOutput);
-    Maze generate(int height, int width, Side sideInput, Side sideOutput);
+//    Maze generate(int height, int width, Side sideInput);
+//    Maze generate(int height, int width, Side sideInput, int coordInput);
+//    Maze generate(int height, int width, Side sideInput, int coordInput, Side sideOutput);
+//    Maze generate(int height, int width, Side sideInput, int coordInput, Side sideOutput, int coordOutput);
+//    Maze generate(int height, int width, Side sideInput, Side sideOutput);
 }
