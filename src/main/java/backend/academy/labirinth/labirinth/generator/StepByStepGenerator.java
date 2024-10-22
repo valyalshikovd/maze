@@ -1,6 +1,6 @@
-package backend.academy.labirinth.labirinth;
+package backend.academy.labirinth.labirinth.generator;
 
-import java.util.List;
+import backend.academy.labirinth.labirinth.Maze;
 
 public interface StepByStepGenerator {
     boolean hasNext();

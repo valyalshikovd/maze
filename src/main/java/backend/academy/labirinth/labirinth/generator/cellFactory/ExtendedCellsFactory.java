@@ -1,5 +1,6 @@
-package backend.academy.labirinth.labirinth;
+package backend.academy.labirinth.labirinth.generator.cellFactory;
 
+import backend.academy.labirinth.labirinth.Cell;
 import backend.academy.labirinth.util.RandomShell;
 import jakarta.inject.Inject;
 
@@ -23,7 +24,7 @@ public class ExtendedCellsFactory implements CellFactory {
     }
 
     private void setType() {
-        System.out.println(count);
+//        System.out.println(count);
         if(count <= 0){
             int type = random.get(3);
             switch (type) {
@@ -33,7 +34,7 @@ public class ExtendedCellsFactory implements CellFactory {
                     break;
                 case 1:
                     currentType = Cell.Type.COIN;
-                    System.out.println("монетка");
+               //     System.out.println("монетка");
                     count = 1;
                     break;
                 case 2:

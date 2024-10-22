@@ -1,16 +1,16 @@
-package backend.academy.labirinth.labirinth.DFSSolver;
+package backend.academy.labirinth.labirinth.solver.DFSSolver;
 
 import backend.academy.labirinth.labirinth.Coordinate;
 import backend.academy.labirinth.labirinth.Maze;
-import backend.academy.labirinth.labirinth.Solver;
-import backend.academy.labirinth.labirinth.StepByStepSolver;
+import backend.academy.labirinth.labirinth.solver.SolvableStepByStep;
+import backend.academy.labirinth.labirinth.solver.StepByStepSolver;
 
 import java.util.List;
 
-public class DFSSolver implements Solver {
+public class DFSSolver implements SolvableStepByStep {
     @Override
     public List<Coordinate> solve(Maze maze) {
-        DFSSolverState solver = new DFSSolverState(maze);
+        DFSStepByStepSolverState solver = new DFSStepByStepSolverState(maze);
         while (solver.hasNext()){
             solver.next();
         }
@@ -19,7 +19,7 @@ public class DFSSolver implements Solver {
 
     @Override
     public StepByStepSolver getStepByStepSolver(Maze maze) {
-        return new DFSSolverState(maze);
+        return new DFSStepByStepSolverState(maze);
     }
 
 

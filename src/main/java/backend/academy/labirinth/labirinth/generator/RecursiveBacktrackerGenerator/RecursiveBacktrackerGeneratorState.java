@@ -1,14 +1,12 @@
-package backend.academy.labirinth.labirinth.RecursiveBacktrackerGenerator;
+package backend.academy.labirinth.labirinth.generator.RecursiveBacktrackerGenerator;
 
 import backend.academy.labirinth.labirinth.Cell;
-import backend.academy.labirinth.labirinth.CellFactory;
+import backend.academy.labirinth.labirinth.generator.cellFactory.CellFactory;
 import backend.academy.labirinth.labirinth.Coordinate;
-import backend.academy.labirinth.labirinth.GeneratorWithNeighborManager;
+import backend.academy.labirinth.labirinth.generator.GeneratorWithNeighborManager;
 import backend.academy.labirinth.labirinth.Maze;
-import backend.academy.labirinth.labirinth.StepByStepGenerator;
-import backend.academy.labirinth.labirinth.StepByStepSolver;
+import backend.academy.labirinth.labirinth.generator.StepByStepGenerator;
 import backend.academy.labirinth.util.RandomShell;
-import net.bytebuddy.asm.MemberSubstitution;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

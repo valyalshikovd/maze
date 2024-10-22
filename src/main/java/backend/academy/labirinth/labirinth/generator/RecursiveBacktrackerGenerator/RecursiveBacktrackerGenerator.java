@@ -1,12 +1,10 @@
-package backend.academy.labirinth.labirinth.RecursiveBacktrackerGenerator;
+package backend.academy.labirinth.labirinth.generator.RecursiveBacktrackerGenerator;
 
-import backend.academy.labirinth.labirinth.CellFactory;
+import backend.academy.labirinth.labirinth.generator.cellFactory.CellFactory;
 import backend.academy.labirinth.labirinth.Coordinate;
-import backend.academy.labirinth.labirinth.Generator;
+import backend.academy.labirinth.labirinth.generator.Generator;
 import backend.academy.labirinth.labirinth.Maze;
-import backend.academy.labirinth.labirinth.StepByStepGenerator;
-import backend.academy.labirinth.labirinth.StepByStepSolver;
-import backend.academy.labirinth.labirinth.growingThreeGenerator.GrowingThreeMazeState;
+import backend.academy.labirinth.labirinth.generator.StepByStepGenerator;
 import backend.academy.labirinth.util.RandomShell;
 import jakarta.inject.Inject;
 

@@ -1,4 +1,6 @@
-package backend.academy.labirinth.labirinth;
+package backend.academy.labirinth.labirinth.solver.DFSSolver;
+
+import backend.academy.labirinth.labirinth.Coordinate;
 
 import java.util.ArrayList;
 import java.util.List;

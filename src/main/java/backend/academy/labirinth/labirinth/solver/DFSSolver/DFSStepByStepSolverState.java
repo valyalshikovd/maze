@@ -1,24 +1,25 @@
-package backend.academy.labirinth.labirinth.DFSSolver;
+package backend.academy.labirinth.labirinth.solver.DFSSolver;
 
 import backend.academy.labirinth.labirinth.*;
+import backend.academy.labirinth.labirinth.solver.StepByStepSolver;
 import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class DFSSolverState implements StepByStepSolver {
+public class DFSStepByStepSolverState implements StepByStepSolver {
 
     private final Maze maze;
     private final Stack<Coordinate> stack = new Stack<>();
     private final List<Coordinate> visitedCoords = new ArrayList<>();
     @Getter
-    private List<Coordinate> result = new ArrayList<>();
+    private final List<Coordinate> result = new ArrayList<>();
     private Coordinate current;
     private boolean flag = true;
-    private Stack<Step> steps = new Stack<>();
+    private final Stack<Step> steps = new Stack<>();
     private Step currStep;
 
-    public DFSSolverState(Maze maze) {
+    public DFSStepByStepSolverState(Maze maze) {
         this.maze = maze;
         current = maze.startCoordinate();
         stack.push(current);

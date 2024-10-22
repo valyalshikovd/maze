@@ -1,5 +1,8 @@
-package backend.academy.labirinth.labirinth;
+package backend.academy.labirinth.labirinth.generator;
 
+import backend.academy.labirinth.labirinth.Cell;
+import backend.academy.labirinth.labirinth.Coordinate;
+import backend.academy.labirinth.labirinth.Maze;
 import backend.academy.labirinth.util.RandomShell;
 import lombok.Getter;
 import java.util.ArrayList;

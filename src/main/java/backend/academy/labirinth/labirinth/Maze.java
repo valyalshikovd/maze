@@ -6,7 +6,9 @@ import lombok.Getter;
 import java.util.Arrays;
 
 public final class Maze {
+    @Getter
     private final int height;
+    @Getter
     private final int width;
     private final Cell[][] grid;
     @Getter

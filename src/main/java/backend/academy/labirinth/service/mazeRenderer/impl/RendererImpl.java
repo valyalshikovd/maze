@@ -40,4 +40,16 @@ public class RendererImpl implements Renderer {
         }
         return sb.toString();
     }
+
+    public String getCodeMaze(Cell[][] cells) {
+        StringBuilder sb = new StringBuilder();
+        for(Cell[] c : cells) {
+            sb.append("new Cell[]{");
+            for(Cell cell : c) {
+                sb.append("new Cell(Cell.Type." + cell.type()+"),");
+            }
+            sb.append("},");
+        }
+        return sb.toString();
+    }
 }

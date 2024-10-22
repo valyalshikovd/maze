@@ -1,14 +1,12 @@
-package backend.academy.labirinth.labirinth.growingThreeGenerator;
+package backend.academy.labirinth.labirinth.generator.growingThreeGenerator;
 
 import backend.academy.labirinth.exception.InvalidInputOutputCoords;
 import backend.academy.labirinth.labirinth.Cell;
 import backend.academy.labirinth.labirinth.Coordinate;
-import backend.academy.labirinth.labirinth.GeneratorWithNeighborManager;
+import backend.academy.labirinth.labirinth.generator.GeneratorWithNeighborManager;
 import backend.academy.labirinth.labirinth.Maze;
 import backend.academy.labirinth.util.RandomShell;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public final class GrowingThreeMazeState extends GeneratorWithNeighborManager {
 

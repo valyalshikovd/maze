@@ -1,9 +1,9 @@
-package backend.academy.labirinth.labirinth.growingThreeGenerator;
+package backend.academy.labirinth.labirinth.generator.growingThreeGenerator;
 
 import backend.academy.labirinth.labirinth.Coordinate;
-import backend.academy.labirinth.labirinth.Generator;
+import backend.academy.labirinth.labirinth.generator.Generator;
 import backend.academy.labirinth.labirinth.Maze;
-import backend.academy.labirinth.labirinth.StepByStepGenerator;
+import backend.academy.labirinth.labirinth.generator.StepByStepGenerator;
 import backend.academy.labirinth.util.RandomShell;
 import jakarta.inject.Inject;
 

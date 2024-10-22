@@ -22,5 +22,7 @@ public record Cell( Type type) {
             this.value = value;
             this.weight = weight;
         }
+
     }
+
 }

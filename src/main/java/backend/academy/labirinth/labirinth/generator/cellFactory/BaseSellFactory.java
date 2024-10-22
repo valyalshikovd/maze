@@ -1,6 +1,8 @@
-package backend.academy.labirinth.labirinth;
+package backend.academy.labirinth.labirinth.generator.cellFactory;
 
-public class BaseSellFactory implements CellFactory{
+import backend.academy.labirinth.labirinth.Cell;
+
+public class BaseSellFactory implements CellFactory {
     @Override
     public Cell getPassageCell() {
         return new Cell(Cell.Type.PASSAGE);

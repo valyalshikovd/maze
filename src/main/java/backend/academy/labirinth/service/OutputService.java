@@ -7,4 +7,5 @@ import java.util.List;
 public interface OutputService {
     void drawMaze(Maze maze);
     void drawMaze(Maze maze, List<Coordinate> path);
+    public void drawCode(Maze maze);
 }

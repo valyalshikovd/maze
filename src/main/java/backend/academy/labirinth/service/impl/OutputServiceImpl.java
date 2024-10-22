@@ -26,4 +26,8 @@ public class OutputServiceImpl implements OutputService {
     public void drawMaze(Maze maze, List<Coordinate> path) {
         PrintWriteShell.println(renderer.render(maze, path));
     }
+
+    public void drawCode(Maze maze) {
+        PrintWriteShell.println(renderer.getCodeMaze(maze.getGrid()));
+    }
 }

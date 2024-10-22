@@ -1,5 +1,6 @@
-package backend.academy.labirinth.labirinth;
+package backend.academy.labirinth.labirinth.generator;
 
+import backend.academy.labirinth.labirinth.Maze;
 import lombok.Getter;
 
 public interface Generator {
