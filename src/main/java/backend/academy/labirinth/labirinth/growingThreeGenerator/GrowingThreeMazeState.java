@@ -94,7 +94,11 @@ public final class GrowingThreeMazeState extends GeneratorWithNeighborManager {
     }
 
     private boolean validateCoordsToPoolNeighbourCoords(Coordinate coord){
-        return Maze.isValidCoordinate(coord, Ysize, Xsize) && !activeCoords.contains(coord) && maze[coord.Y()][coord.X()].type() != Cell.Type.PASSAGE;
+        return Maze.isValidCoordinate(coord, Ysize, Xsize)
+            && !activeCoords.contains(coord)
+            && maze[coord.Y()][coord.X()].type() != Cell.Type.PASSAGE
+            && maze[coord.Y()][coord.X()].type() != Cell.Type.COIN
+            && maze[coord.Y()][coord.X()].type() != Cell.Type.SWAMP;
     }
 
 

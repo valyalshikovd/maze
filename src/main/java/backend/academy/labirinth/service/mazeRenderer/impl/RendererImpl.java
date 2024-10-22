@@ -34,7 +34,7 @@ public class RendererImpl implements Renderer {
         StringBuilder sb = new StringBuilder();
         for(Cell[] c : cells) {
             for(Cell cell : c) {
-                sb.append(cell.type().value());
+                    sb.append(cell.type().value());
             }
             sb.append("\n");
         }

@@ -1,5 +1,7 @@
 package backend.academy.labirinth.labirinth;
 
+import backend.academy.labirinth.labirinth.RecursiveBacktrackerGenerator.RecursiveBacktrackerGenerator;
+import backend.academy.labirinth.labirinth.RecursiveBacktrackerGenerator.RecursiveBacktrackerGeneratorState;
 import backend.academy.labirinth.service.OutputService;
 import backend.academy.labirinth.util.juice.ObjectFabric;
 import com.google.inject.Inject;
@@ -26,15 +28,32 @@ public final class MazeManager {
 
     public void start(){
 
-        Maze maze = generator.generate(30, 30);
+//        Maze maze = generator.generate(30, 30);
+//
+//        Scanner scanner = new Scanner(System.in);
+//        StepByStepSolver s = solver.getStepByStepSolver(maze);
+//        while (s.hasNext()){
+//            outputService.drawMaze(maze, s.next());
+//            scanner.nextLine();
+//        }
+
 
         Scanner scanner = new Scanner(System.in);
-        StepByStepSolver s = solver.getStepByStepSolver(maze);
+       // StepByStepSolver s = solver.getStepByStepSolver(maze);
+        StepByStepGenerator s = generator.getStepByStepGenerator(30,30);
+
         while (s.hasNext()){
-            outputService.drawMaze(maze, s.next());
+            s.next();
+            outputService.drawMaze(s.getMaze());
             scanner.nextLine();
         }
 
+        StepByStepSolver stepByStepSolver = solver.getStepByStepSolver(s.getMaze());
+
+        while (stepByStepSolver.hasNext()){
+            outputService.drawMaze(s.getMaze(), stepByStepSolver.next());
+            scanner.nextLine();
+        }
         //outputService.drawMaze(maze, solver.solve(maze));
 
     }

@@ -1,6 +1,7 @@
 package backend.academy.labirinth.labirinth;
 
 import backend.academy.labirinth.util.RandomShell;
+import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +12,9 @@ public abstract class GeneratorWithNeighborManager {
     protected final Coordinate input;
     protected Coordinate output;
     protected final RandomShell random;
-    protected final List<Coordinate> activeCoords = new ArrayList<>();
+    protected List<Coordinate> activeCoords = new ArrayList<>();
     protected final Cell[][] maze;
+    protected Maze actualMaze;
 
     protected GeneratorWithNeighborManager(int ysize, int xsize, Coordinate input, Coordinate output, RandomShell random) {
         Ysize = ysize;
@@ -33,6 +35,7 @@ public abstract class GeneratorWithNeighborManager {
     }
 
     protected class NeighborManager{
+        @Getter
         private final List<Coordinate> neighbors = new ArrayList<>();
         private final Coordinate currentCoord;
 
@@ -56,6 +59,7 @@ public abstract class GeneratorWithNeighborManager {
                 return null;
             }
             Coordinate res = neighbors.get(random.get(neighbors.size()));
+
             if(res.Y() > currentCoord.Y()){
                 maze[currentCoord.Y() + 1][currentCoord.X()] = new Cell(Cell.Type.PASSAGE);
                 return res;
@@ -72,6 +76,7 @@ public abstract class GeneratorWithNeighborManager {
                 maze[currentCoord.Y()][currentCoord.X() - 1] = new Cell(Cell.Type.PASSAGE);
                 return res;
             }
+            neighbors.remove(res);
             return null;
         }
     }

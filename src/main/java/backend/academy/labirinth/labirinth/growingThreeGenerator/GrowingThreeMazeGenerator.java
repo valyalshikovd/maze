@@ -3,6 +3,7 @@ package backend.academy.labirinth.labirinth.growingThreeGenerator;
 import backend.academy.labirinth.labirinth.Coordinate;
 import backend.academy.labirinth.labirinth.Generator;
 import backend.academy.labirinth.labirinth.Maze;
+import backend.academy.labirinth.labirinth.StepByStepGenerator;
 import backend.academy.labirinth.util.RandomShell;
 import jakarta.inject.Inject;
 
@@ -26,6 +27,11 @@ public class GrowingThreeMazeGenerator implements Generator {
             default -> null;
         };
         return new GrowingThreeMazeState(height, width, coordinate, null, random).generateMaze();
+    }
+
+    @Override
+    public StepByStepGenerator getStepByStepGenerator(int height, int width) {
+        return null;
     }
 
 //    @Override

@@ -98,7 +98,10 @@ public class DFSSolverState implements StepByStepSolver {
         return
             maze.isValidCoordinate(coordinate)
                 && (maze.getCell(coordinate).type() == Cell.Type.PASSAGE
-                || maze.getCell(coordinate).type() == Cell.Type.OUTPUT)
+                || maze.getCell(coordinate).type() == Cell.Type.OUTPUT
+                || maze.getCell(coordinate).type() == Cell.Type.SWAMP
+                || maze.getCell(coordinate).type() == Cell.Type.COIN
+            )
                 && !visitedCoords.contains(coordinate);
     }
 
