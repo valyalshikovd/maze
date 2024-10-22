@@ -2,7 +2,9 @@ package backend.academy.labirinth.labirinth;
 
 import backend.academy.labirinth.labirinth.RecursiveBacktrackerGenerator.RecursiveBacktrackerGenerator;
 import backend.academy.labirinth.labirinth.RecursiveBacktrackerGenerator.RecursiveBacktrackerGeneratorState;
+import backend.academy.labirinth.labirinth.wallDestroyer.WallDestroyer;
 import backend.academy.labirinth.service.OutputService;
+import backend.academy.labirinth.util.RandomShell;
 import backend.academy.labirinth.util.juice.ObjectFabric;
 import com.google.inject.Inject;
 import java.util.List;
@@ -13,12 +15,19 @@ public final class MazeManager {
     private final OutputService outputService;
     private final Generator generator;
     private final Solver solver;
+    private final RandomShell randomShell;
+    private final CellFactory cellFactory;
 
     @Inject
-    private MazeManager(OutputService outputService, Generator generator, Solver solver) {
+    private MazeManager(OutputService outputService, Generator generator, Solver solver,
+        CellFactory cellFactory,
+        RandomShell randomShell
+    ) {
         this.outputService = outputService;
         this.generator = generator;
         this.solver = solver;
+        this.cellFactory = cellFactory;
+        this.randomShell = randomShell;
     }
 
 
@@ -48,10 +57,25 @@ public final class MazeManager {
             scanner.nextLine();
         }
 
-        StepByStepSolver stepByStepSolver = solver.getStepByStepSolver(s.getMaze());
+        Maze m = WallDestroyer.destroyWalls(s.getMaze(), randomShell,  cellFactory);
+
+//        StringBuilder sb = new StringBuilder();
+//        for(Cell[] c : m.getGrid()) {
+//            for(Cell cell : c) {
+//                sb.append(cell.type().value());
+//            }
+//            sb.append("\n");
+//        }
+//        System.out.println(sb.toString());
+
+
+        outputService.drawMaze(m);
+
+
+        StepByStepSolver stepByStepSolver = solver.getStepByStepSolver(m);
 
         while (stepByStepSolver.hasNext()){
-            outputService.drawMaze(s.getMaze(), stepByStepSolver.next());
+            outputService.drawMaze(m, stepByStepSolver.next());
             scanner.nextLine();
         }
         //outputService.drawMaze(maze, solver.solve(maze));
