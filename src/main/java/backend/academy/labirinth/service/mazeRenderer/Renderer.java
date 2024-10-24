@@ -9,5 +9,5 @@ import java.util.List;
 public interface Renderer {
     String render(Maze maze);
     String render(Maze maze, List<Coordinate> path);
-    String getCodeMaze(Cell[][] cells);
+    String getCodeMaze(Maze grid);
 }

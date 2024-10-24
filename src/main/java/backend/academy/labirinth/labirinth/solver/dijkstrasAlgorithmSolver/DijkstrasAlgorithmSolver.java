@@ -78,7 +78,6 @@ public class DijkstrasAlgorithmSolver implements Solver {
 
     }
 
-
     private boolean validateCoord(Coordinate coordinate, Maze maze) {
         return
             maze.isValidCoordinate(coordinate)

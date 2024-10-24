@@ -29,7 +29,11 @@ public class RecursiveBacktrackerGenerator implements Generator {
             case 3 -> new Coordinate(0, random.get(height - 3));
             default -> null;
         };
-        return null;
+        RecursiveBacktrackerGeneratorState r = new RecursiveBacktrackerGeneratorState(width, height, coordinate, null, random, cellFactory);
+        while (r.hasNext()){
+            r.next();
+        }
+        return r.getMaze();
     }
 
     @Override

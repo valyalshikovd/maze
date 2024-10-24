@@ -1,8 +1,8 @@
 package backend.academy.labirinth.labirinth.wallDestroyer;
 
 import backend.academy.labirinth.labirinth.Cell;
-import backend.academy.labirinth.labirinth.CellFactory;
 import backend.academy.labirinth.labirinth.Maze;
+import backend.academy.labirinth.labirinth.generator.cellFactory.CellFactory;
 import backend.academy.labirinth.util.RandomShell;
 
 public class WallDestroyer {
