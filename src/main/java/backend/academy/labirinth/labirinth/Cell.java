@@ -3,7 +3,7 @@ package backend.academy.labirinth.labirinth;
 import backend.academy.labirinth.config.Config;
 import lombok.Getter;
 
-public record Cell( Type type) {
+public record Cell(Type type) {
     public enum Type {
         WALL(Config.WALL_STRING, 1000),
         PASSAGE(Config.PASS_STRING, 10),

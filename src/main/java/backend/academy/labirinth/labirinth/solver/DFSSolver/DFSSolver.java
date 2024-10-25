@@ -11,7 +11,7 @@ public class DFSSolver implements SolvableStepByStep {
     @Override
     public List<Coordinate> solve(Maze maze) {
         DFSStepByStepSolverState solver = new DFSStepByStepSolverState(maze);
-        while (solver.hasNext()){
+        while (solver.hasNext()) {
             solver.next();
         }
         return solver.result();
@@ -22,5 +22,13 @@ public class DFSSolver implements SolvableStepByStep {
         return new DFSStepByStepSolverState(maze);
     }
 
+    @Override
+    public StepByStepSolver getStepByStepSolver() {
+        return new DFSStepByStepSolverState();
+    }
+
+    @Override public String toString() {
+        return "DFS Solver (StepByStep)";
+    }
 
 }

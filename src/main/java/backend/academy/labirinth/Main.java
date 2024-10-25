@@ -8,13 +8,6 @@ public class Main {
 
 
 
-
-
-
-
-
-
-
          MazeManager.initialize();
 
 //        Cell[][] cells = new Cell[][]{

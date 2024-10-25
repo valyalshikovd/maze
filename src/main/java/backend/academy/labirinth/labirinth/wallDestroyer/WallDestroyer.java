@@ -4,21 +4,21 @@ import backend.academy.labirinth.labirinth.Cell;
 import backend.academy.labirinth.labirinth.Maze;
 import backend.academy.labirinth.labirinth.generator.cellFactory.CellFactory;
 import backend.academy.labirinth.util.RandomShell;
+import backend.academy.labirinth.util.RandomShellImpl;
+import backend.academy.labirinth.util.juice.ObjectFabric;
 
 public class WallDestroyer {
 
-    public static Maze destroyWalls(Maze maze, RandomShell randomShell, CellFactory cellFactory) {
+    public static Maze destroyWalls(Maze maze) {
 
         Cell[][] cells = maze.getGrid();
 
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[i].length; j++) {
-
                 if (!validType(cells[i][j])) {
                     continue;
                 }
-
-                checkNeigbours(cells, i, j, randomShell, cellFactory);
+                checkNeigbours(cells, i, j, ObjectFabric.getObject(RandomShellImpl.class), ObjectFabric.getObject(CellFactory.class));
             }
         }
 
@@ -47,10 +47,8 @@ public class WallDestroyer {
                 && cells[i + 1][j - 1] != null
                 && cells[i + 1][j - 1].type() == Cell.Type.WALL
         ) {
-        //    System.out.println("условие пройдено");
             int rand = randomShell.get(5);
             if (rand == 4) {
-         //       System.out.println("стена сломана");
                 cells[i + 1][j] = cellFactory.getPassageCell();
             }
         }
@@ -69,10 +67,8 @@ public class WallDestroyer {
                 && cells[i - 1][j - 1].type() == Cell.Type.WALL
         ) {
             int rand = randomShell.get(5);
-         //   System.out.println("условие пройдено");
             if (rand == 4) {
                 cells[i - 1][j] = cellFactory.getPassageCell();
-          //      System.out.println("стена сломана");
             }
         }
 
@@ -89,10 +85,8 @@ public class WallDestroyer {
                 && cells[i - 1][j + 1] != null
                 && cells[i - 1][j + 1].type() == Cell.Type.WALL
         ) {
-         //   System.out.println("условие пройдено");
             int rand = randomShell.get(5);
             if (rand == 4) {
-        //        System.out.println("стена сломана");
                 cells[i][j + 1] = cellFactory.getPassageCell();
             }
         }
@@ -110,14 +104,11 @@ public class WallDestroyer {
                 && cells[i - 1][j - 1] != null
                 && cells[i - 1][j - 1].type() == Cell.Type.WALL
         ) {
-     //       System.out.println("условие пройдено");
             int rand = randomShell.get(5);
             if (rand == 4) {
-    //            System.out.println("стена сломана");
                 cells[i][j - 1] = cellFactory.getPassageCell();
             }
         }
-
     }
 
     private static boolean validType(Cell cell) {

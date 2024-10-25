@@ -1,9 +1,11 @@
 package backend.academy.labirinth.labirinth.generator.cellFactory;
 
+import backend.academy.labirinth.config.Config;
 import backend.academy.labirinth.labirinth.Cell;
 import backend.academy.labirinth.util.RandomShell;
 import jakarta.inject.Inject;
 
+@SuppressWarnings("MagicNumber")
 public class ExtendedCellsFactory implements CellFactory {
 
     private final RandomShell random;
@@ -24,9 +26,8 @@ public class ExtendedCellsFactory implements CellFactory {
     }
 
     private void setType() {
-//        System.out.println(count);
-        if(count <= 0){
-            int type = random.get(3);
+        if (count <= 0) {
+            int type = random.get(Config.COUNT_OF_SURFACES);
             switch (type) {
                 case 0:
                     currentType = Cell.Type.PASSAGE;
@@ -34,12 +35,13 @@ public class ExtendedCellsFactory implements CellFactory {
                     break;
                 case 1:
                     currentType = Cell.Type.COIN;
-               //     System.out.println("монетка");
                     count = 1;
                     break;
                 case 2:
                     currentType = Cell.Type.SWAMP;
                     count = random.get(8);
+                    break;
+                default:
                     break;
             }
         }

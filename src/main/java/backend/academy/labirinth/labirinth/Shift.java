@@ -23,6 +23,6 @@ public class Shift {
     }
 
     public Coordinate getShiftedCoordinate(Coordinate coordinate){
-        return new Coordinate(coordinate.X() + x, coordinate.Y() + y);
+        return new Coordinate(coordinate.x() + x, coordinate.y() + y);
     }
 }

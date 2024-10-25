@@ -33,7 +33,7 @@ public class DijkstrasAlgorithmSolver implements Solver {
 
         PriorityQueue<CellInfo> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a.distance));
 
-        dist[maze.startCoordinate().Y()][maze.startCoordinate().X()] = 0;
+        dist[maze.startCoordinate().y()][maze.startCoordinate().x()] = 0;
         pq.add(new CellInfo(maze.startCoordinate(), 0));
 
         while (!pq.isEmpty()) {
@@ -53,25 +53,24 @@ public class DijkstrasAlgorithmSolver implements Solver {
                 }
 
                 int newDist =
-                    dist[currentCoordinate.Y()][currentCoordinate.X()]
-                        + grid[neighbor.Y()][neighbor.X()].type().weight();
+                    dist[currentCoordinate.y()][currentCoordinate.x()]
+                        + grid[neighbor.y()][neighbor.x()].type().weight();
 
-                if (newDist < dist[neighbor.Y()][neighbor.X()]) {
-                    dist[neighbor.Y()][neighbor.X()] = newDist;
-                    prev[neighbor.Y()][neighbor.X()] = currentCoordinate;
+                if (newDist < dist[neighbor.y()][neighbor.x()]) {
+                    dist[neighbor.y()][neighbor.x()] = newDist;
+                    prev[neighbor.y()][neighbor.x()] = currentCoordinate;
                     pq.add(new CellInfo(neighbor, newDist));
                 }
-
             }
         }
-        if (dist[maze.endCoordinate().Y() + 1][maze.endCoordinate().X() + 1] == Integer.MAX_VALUE) {
+        if (dist[maze.endCoordinate().y()][maze.endCoordinate().x()] == Integer.MAX_VALUE) {
             return List.of();
         }
         List<Coordinate> path = new ArrayList<>();
-        Coordinate current = new Coordinate(maze.endCoordinate().X() + 1, maze.endCoordinate().Y() + 1);
+        Coordinate current = new Coordinate(maze.endCoordinate().x(), maze.endCoordinate().y());
         while (current != null) {
             path.add(current);
-            current = prev[current.Y()][current.X()];
+            current = prev[current.y()][current.x()];
         }
         Collections.reverse(path);
         return path;
@@ -86,5 +85,9 @@ public class DijkstrasAlgorithmSolver implements Solver {
                 || maze.getCell(coordinate).type() == Cell.Type.SWAMP
                 || maze.getCell(coordinate).type() == Cell.Type.COIN
             );
+    }
+
+    @Override public String toString() {
+        return "DijkstrasAlgorithmSolver";
     }
 }

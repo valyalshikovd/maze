@@ -4,8 +4,11 @@ import backend.academy.labirinth.labirinth.Cell;
 
 public interface CellFactory {
 
-    public Cell getPassageCell();
-    public Cell getOutput();
-    public Cell getInput();
-    public Cell getWall();
+    Cell getPassageCell();
+
+    Cell getOutput();
+
+    Cell getInput();
+
+    Cell getWall();
 }

@@ -47,7 +47,7 @@ public final class Maze {
         if(!isValidCoordinate(coordinate)) {
             throw new InvalidCoordinate("invalid coordinate");
         }
-        grid[coordinate.Y()][coordinate.X()] = cell;
+        grid[coordinate.y()][coordinate.x()] = cell;
     }
 
     public Cell[][] getGrid() {
@@ -62,7 +62,7 @@ public final class Maze {
         if(!isValidCoordinate(coordinate)) {
             throw new InvalidCoordinate("invalid coordinate");
         }
-        return grid[coordinate.Y()][coordinate.X()];
+        return grid[coordinate.y()][coordinate.x()];
     }
 
     public Cell getCell(int x, int y) {
@@ -73,7 +73,7 @@ public final class Maze {
     }
 
     public boolean isValidCoordinate(Coordinate coordinate) {
-        return coordinate.Y() > 0 && coordinate.Y() < width && coordinate.X() > 0 && coordinate.X() < height;
+        return coordinate.y() > 0 && coordinate.y() < width && coordinate.x() > 0 && coordinate.x() < height;
     }
 
     public Coordinate getValidCoordinate(Coordinate coordinate) {
@@ -86,7 +86,7 @@ public final class Maze {
         return null;
     }
     public static boolean isValidCoordinate(Coordinate coordinate, int height, int width) {
-        return coordinate.Y() > -1 && coordinate.X() < width && coordinate.X() > -1 && coordinate.Y()  < height;
+        return coordinate.y() > -1 && coordinate.x() < width && coordinate.x() > -1 && coordinate.y()  < height;
     }
 }
 

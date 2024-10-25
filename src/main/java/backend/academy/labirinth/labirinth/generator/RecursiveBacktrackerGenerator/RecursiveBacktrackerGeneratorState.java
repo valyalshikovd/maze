@@ -34,14 +34,14 @@ public class RecursiveBacktrackerGeneratorState extends GeneratorWithNeighborMan
         RandomShell random,
         CellFactory cellFactory
     ) {
-        super(reductionToOdd(y_SIZE), reductionToOdd(x_SIZE), new Coordinate(inputCoord.X() + 1,inputCoord.Y() + 1), outputCoord, random);
-        currentCoord = new Coordinate(inputCoord.X(), inputCoord.Y());
+        super(reductionToOdd(y_SIZE), reductionToOdd(x_SIZE), new Coordinate(inputCoord.x() + 1,inputCoord.y() + 1), outputCoord, random);
+        currentCoord = new Coordinate(inputCoord.x(), inputCoord.y());
         this.cellFactory = cellFactory;
         for(Cell[] cells : maze){
             Arrays.fill(cells, cellFactory.getWall());
         }
 
-        maze[inputCoord.Y()][inputCoord.X()] = cellFactory.getInput();
+        maze[inputCoord.y()][inputCoord.x()] = cellFactory.getInput();
 
     }
 
@@ -53,18 +53,19 @@ public class RecursiveBacktrackerGeneratorState extends GeneratorWithNeighborMan
 
         List<Coordinate> neighbors = getNeighbors(currentCoord);
 
-        if(neighbors.isEmpty() && output == null){
+        if (neighbors.isEmpty() && output == null) {
+            System.out.println("-");
             output = currentCoord;
         }
 
         Coordinate coordinate = null;
 
-        if(!neighbors.isEmpty()){
+        if (!neighbors.isEmpty()) {
             coordinate = neighbors.get(random.get(neighbors.size()));
         }
 
 
-        if(coordinate != null) {
+        if (coordinate != null) {
             neighbors.remove(coordinate);
             breakWalls(currentCoord, coordinate);
 
@@ -74,7 +75,7 @@ public class RecursiveBacktrackerGeneratorState extends GeneratorWithNeighborMan
             }
             currentCoord = coordinate;
         }
-        if( coordinate == null &&  !iterationStack.isEmpty() ) {
+        if (coordinate == null &&  !iterationStack.isEmpty()) {
 
             Iteration iter = iterationStack.pop();
             while (!validateCoordsToPoolNeighbourCoords(iter.nextCoord)){
@@ -88,59 +89,61 @@ public class RecursiveBacktrackerGeneratorState extends GeneratorWithNeighborMan
                 currentCoord = iter.nextCoord;
 
         }
-        if(currentCoord != null && validateCoordsToPoolNeighbourCoords(currentCoord)  ) {
+        if (currentCoord != null && validateCoordsToPoolNeighbourCoords(currentCoord)) {
             activeCoords.add(currentCoord);
-            maze[currentCoord.Y()][currentCoord.X()] = cellFactory.getPassageCell();
+            maze[currentCoord.y()][currentCoord.x()] = cellFactory.getPassageCell();
         }
 
-        Cell[][] cells = new Cell[this.Ysize + 2][this.Xsize + 2];
+        Cell[][] cells = new Cell[this.ySize + 2][this.xSize + 2];
 
-        for (int j = 0; j < Xsize+2; j++) {
+        for (int j = 0; j < xSize +2; j++) {
             cells[0][j] = new Cell(Cell.Type.WALL);
         }
-        for (int j = 0; j < Xsize+2; j++) {
-            cells[Ysize+1][j] = new Cell(Cell.Type.WALL);
+        for (int j = 0; j < xSize +2; j++) {
+            cells[ySize +1][j] = new Cell(Cell.Type.WALL);
         }
-        for (int j = 0; j < Ysize+2; j++) {
+        for (int j = 0; j < ySize +2; j++) {
             cells[j][0] = new Cell(Cell.Type.WALL);
         }
-        for (int j = 0; j < Ysize+2; j++) {
-            cells[j][Xsize+1] = new Cell(Cell.Type.WALL);
+        for (int j = 0; j < ySize +2; j++) {
+            cells[j][xSize +1] = new Cell(Cell.Type.WALL);
         }
-        for (int i = 1; i < Ysize+1; i++) {
-            for (int j = 1; j < Xsize+1; j++) {
+        for (int i = 1; i < ySize +1; i++) {
+            for (int j = 1; j < xSize +1; j++) {
                 cells[i][j] = maze[i - 1][j -1 ];
             }
         }
-    //
-    //    cells[input.Y()][input.X()] = new Cell(Cell.Type.INPUT);
-        if(output != null){
-            cells[output.Y() + 1][output.X() + 1] = new Cell(Cell.Type.OUTPUT);
+        if (output != null) {
+            cells[output.y() + 1][output.x() + 1] = new Cell(Cell.Type.OUTPUT);
         }
 
-        actualMaze = new Maze(cells, input, output);
+        if (output == null) {
+            actualMaze = new Maze(cells, new Coordinate(input.x()  + 1, input.y() + 1), null);
+        }else {
+            actualMaze = new Maze(cells, new Coordinate(input.x()  + 1, input.y() + 1), new Coordinate(output.x() + 1, output.y() + 1));
+        }
     }
 
     private void breakWalls(Coordinate source, Coordinate target){
-        if(target.Y() > source.Y()){
-            maze[source.Y() + 1][source.X()] = cellFactory.getPassageCell();
-            activeCoords.add(new Coordinate(source.X(), source.Y()+1));
+        if (target.y() > source.y()) {
+            maze[source.y() + 1][source.x()] = cellFactory.getPassageCell();
+            activeCoords.add(new Coordinate(source.x(), source.y()+1));
         }
-        if(target.Y() < source.Y()){
-            maze[source.Y() - 1][source.X()] = cellFactory.getPassageCell();
-            activeCoords.add(new Coordinate(source.X(), source.Y()-1));
+        if (target.y() < source.y()) {
+            maze[source.y() - 1][source.x()] = cellFactory.getPassageCell();
+            activeCoords.add(new Coordinate(source.x(), source.y()-1));
         }
-        if(target.X() > source.X()){
-            maze[source.Y()][source.X()  +1] = cellFactory.getPassageCell();
-            activeCoords.add(new Coordinate(source.X() + 1, source.Y()+1));
+        if (target.x() > source.x()) {
+            maze[source.y()][source.x()  +1] = cellFactory.getPassageCell();
+            activeCoords.add(new Coordinate(source.x() + 1, source.y()+1));
         }
-        if(target.X() < source.X()){
-            maze[source.Y()][source.X() - 1] = cellFactory.getPassageCell();
-            activeCoords.add(new Coordinate(source.X()-1, source.Y()));
+        if (target.x() < source.x()) {
+            maze[source.y()][source.x() - 1] = cellFactory.getPassageCell();
+            activeCoords.add(new Coordinate(source.x()-1, source.y()));
         }
     }
 
-    private static class Iteration{
+    private static class Iteration {
         Coordinate currentCoord;
         Coordinate nextCoord;
 
@@ -152,20 +155,20 @@ public class RecursiveBacktrackerGeneratorState extends GeneratorWithNeighborMan
 
     private List<Coordinate> getNeighbors(Coordinate coordinate){
         List<Coordinate> neighbors = new ArrayList<>();
-        Coordinate coord = new Coordinate(coordinate.X() ,coordinate.Y() + 2);
-        if(validateCoordsToPoolNeighbourCoords(coord)){
+        Coordinate coord = new Coordinate(coordinate.x() ,coordinate.y() + 2);
+        if (validateCoordsToPoolNeighbourCoords(coord)){
             neighbors.add(coord);
         }
-        coord = new Coordinate(coordinate.X() ,coordinate.Y() - 2);
-        if(validateCoordsToPoolNeighbourCoords(coord)){
+        coord = new Coordinate(coordinate.x() ,coordinate.y() - 2);
+        if (validateCoordsToPoolNeighbourCoords(coord)) {
             neighbors.add(coord);
         }
-        coord = new Coordinate(coordinate.X() + 2 ,coordinate.Y());
-        if(validateCoordsToPoolNeighbourCoords(coord)){
+        coord = new Coordinate(coordinate.x() + 2 ,coordinate.y());
+        if (validateCoordsToPoolNeighbourCoords(coord)) {
             neighbors.add(coord);
         }
-        coord = new Coordinate(coordinate.X() - 2 ,coordinate.Y());
-        if(validateCoordsToPoolNeighbourCoords(coord)){
+        coord = new Coordinate(coordinate.x() - 2 ,coordinate.y());
+        if (validateCoordsToPoolNeighbourCoords(coord)) {
             neighbors.add(coord);
         }
         return neighbors;
@@ -173,11 +176,11 @@ public class RecursiveBacktrackerGeneratorState extends GeneratorWithNeighborMan
 
     private boolean validateCoordsToPoolNeighbourCoords(Coordinate coord){
         return
-            Maze.isValidCoordinate(coord, Ysize, Xsize)
-                && !activeCoords.contains(coord) && maze[coord.Y()][coord.X()].type() != Cell.Type.PASSAGE
-                && maze[coord.Y()][coord.X()].type() != Cell.Type.INPUT
-                && maze[coord.Y()][coord.X()].type() != Cell.Type.COIN
-                && maze[coord.Y()][coord.X()].type() != Cell.Type.SWAMP;
+            Maze.isValidCoordinate(coord, ySize, xSize)
+                && !activeCoords.contains(coord) && maze[coord.y()][coord.x()].type() != Cell.Type.PASSAGE
+                && maze[coord.y()][coord.x()].type() != Cell.Type.INPUT
+                && maze[coord.y()][coord.x()].type() != Cell.Type.COIN
+                && maze[coord.y()][coord.x()].type() != Cell.Type.SWAMP;
     }
 
     @Override

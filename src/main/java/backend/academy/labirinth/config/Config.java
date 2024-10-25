@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 
 
+@SuppressWarnings("MultipleStringLiterals")
 public final class Config {
     public static final PrintStream OUT = System.out;
     public static final InputStream IN = System.in;
@@ -20,12 +21,13 @@ public final class Config {
     public static final String PASS_STRING  = WHITE_BACKGROUND + WHITE_TEXT + "   " + RESET;
     public static final String WALL_STRING  = BLACK_BACKGROUND + WHITE_TEXT + "   " + RESET;
     public static final String WAY_STRING  = BLUE_BACKGROUND + WHITE_TEXT + "   " + RESET;
-    public static final String INPUT_STRING  = GREEN_BACKGROUND + WHITE_TEXT + "   " + RESET;
+    public static final String INPUT_STRING  = BLUE_BACKGROUND + WHITE_TEXT + "   " + RESET;
     public static final String OUTPUT_STRING  = RED_BACKGROUND + WHITE_TEXT + "   " + RESET;
     public static final String SWAMP_STRING = DARK_GREEN_BACKGROUND + WHITE_TEXT + "   " + RESET;
     public static final String COIN_STRING = WHITE_BACKGROUND + YELLOW_TEXT + " ● " + RESET;
     public static final int NUMBER_OF_GENERATOR = 2;
     public static final int NUMBER_OF_SOLVER = 2;
+    public static final int COUNT_OF_SURFACES = 3;
 
     //потому что не должен иметь конструктор
     private Config() {

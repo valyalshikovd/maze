@@ -9,7 +9,8 @@ import java.util.Stack;
 
 public class DFSStepByStepSolverState implements StepByStepSolver {
 
-    private final Maze maze;
+
+    private Maze maze;
     private final Stack<Coordinate> stack = new Stack<>();
     private final List<Coordinate> visitedCoords = new ArrayList<>();
     @Getter
@@ -24,6 +25,21 @@ public class DFSStepByStepSolverState implements StepByStepSolver {
         current = maze.startCoordinate();
         stack.push(current);
         currStep = new Step(0);
+    }
+
+    public DFSStepByStepSolverState() {
+    }
+
+    public void setMaze(Maze maze) {
+        this.maze = maze;
+        current = maze.startCoordinate();
+        stack.push(current);
+        currStep = new Step(0);
+    }
+
+    @Override
+    public Maze getMaze() {
+        return maze;
     }
 
     public boolean hasNext() {
@@ -54,10 +70,10 @@ public class DFSStepByStepSolverState implements StepByStepSolver {
                 }
             }
             while (!steps.isEmpty() && steps.peek().numNeigh < 1) {
-                if(steps.peek().numNeigh == 0 ){
+                if (steps.peek().numNeigh == 0 ){
                     result.removeAll(steps.pop().coord);
                 }
-                if(!steps.isEmpty() && steps.peek().numNeigh > 0){
+                if (!steps.isEmpty() && steps.peek().numNeigh > 0) {
                     steps.peek().numNeigh = steps.peek().numNeigh - 1;
                 }
             }
@@ -79,10 +95,10 @@ public class DFSStepByStepSolverState implements StepByStepSolver {
 
     public List<Coordinate> getNeighbours(Coordinate coord) {
         List<Coordinate> coords = new ArrayList<>();
-        addToCords(coords, new Coordinate(coord.X(), coord.Y() + 1));
-        addToCords(coords, new Coordinate(coord.X(), coord.Y() - 1));
-        addToCords(coords, new Coordinate(coord.X() + 1, coord.Y()));
-        addToCords(coords, new Coordinate(coord.X() - 1, coord.Y()));
+        addToCords(coords, new Coordinate(coord.x(), coord.y() + 1));
+        addToCords(coords, new Coordinate(coord.x(), coord.y() - 1));
+        addToCords(coords, new Coordinate(coord.x() + 1, coord.y()));
+        addToCords(coords, new Coordinate(coord.x() - 1, coord.y()));
         return coords;
     }
 

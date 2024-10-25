@@ -28,10 +28,10 @@ public class RendererImpl implements Renderer {
     private Cell[][] injectPathInMaze(Cell[][] src, List<Coordinate> path) {
         Cell[][] res = Arrays.copyOf(src, src.length);
         for(Coordinate c : path) {
-            if(res[c.Y()][c.X()].type() == Cell.Type.INPUT){
+            if(res[c.y()][c.x()].type() == Cell.Type.INPUT){
                 continue;
             }
-            res[c.Y()][c.X()] = new Cell( Cell.Type.WAY);
+            res[c.y()][c.x()] = new Cell( Cell.Type.WAY);
         }
         return res;
     }

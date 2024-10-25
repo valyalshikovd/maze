@@ -1,6 +1,5 @@
 package backend.academy.labirinth.labirinth.generator.growingThreeGenerator;
 
-import backend.academy.labirinth.exception.InvalidInputOutputCoords;
 import backend.academy.labirinth.labirinth.Cell;
 import backend.academy.labirinth.labirinth.Coordinate;
 import backend.academy.labirinth.labirinth.generator.GeneratorWithNeighborManager;
@@ -16,7 +15,7 @@ public final class GrowingThreeMazeState extends GeneratorWithNeighborManager {
         super(reductionToOdd(height), reductionToOdd(width), input, output, random);
     }
 
-    private static int reductionToOdd (int val){
+    private static int reductionToOdd (int val) {
         if (val % 2 == 0){
              val --;
         }
@@ -26,25 +25,19 @@ public final class GrowingThreeMazeState extends GeneratorWithNeighborManager {
 
     public Maze generateMaze() {
 
-        if(checkEdgeCoords(input)){
-            throw new InvalidInputOutputCoords("invalid input output coords");
-        }
-        if(output != null && (checkEdgeCoords(output) || input.equals(output))){
-            throw new InvalidInputOutputCoords("invalid input output coords");
-        }
-        for(Cell[] cells : maze){
+        for(Cell[] cells : maze) {
             Arrays.fill(cells, new Cell(Cell.Type.WALL));
         }
 
         Coordinate currentCoord = input;
         activeCoords.add(currentCoord);
-        while (!activeCoords.isEmpty()){
+        while (!activeCoords.isEmpty()) {
             Coordinate tempCoord = null;
-            while (currentCoord != null){
+            while (currentCoord != null) {
                 tempCoord = currentCoord;
                 currentCoord = getRandomNeighbourCoordinate(currentCoord);
-                if(currentCoord != null){
-                    maze[currentCoord.Y()][currentCoord.X()] =  new Cell(Cell.Type.PASSAGE);
+                if (currentCoord != null) {
+                    maze[currentCoord.y()][currentCoord.x()] =  new Cell(Cell.Type.PASSAGE);
                     activeCoords.add(currentCoord);
                 }
             }
@@ -58,28 +51,28 @@ public final class GrowingThreeMazeState extends GeneratorWithNeighborManager {
         }
 
 
-        Cell[][] cells =  new Cell[Ysize+2][Xsize+2];
+        Cell[][] cells =  new Cell[ySize +2][xSize +2];
 
-        for (int j = 0; j < Xsize+2; j++) {
+        for (int j = 0; j < xSize +2; j++) {
             cells[0][j] = new Cell(Cell.Type.WALL);
         }
-        for (int j = 0; j < Xsize+2; j++) {
-            cells[Ysize+1][j] = new Cell(Cell.Type.WALL);
+        for (int j = 0; j < xSize +2; j++) {
+            cells[ySize +1][j] = new Cell(Cell.Type.WALL);
         }
-        for (int j = 0; j < Ysize+2; j++) {
+        for (int j = 0; j < ySize +2; j++) {
             cells[j][0] = new Cell(Cell.Type.WALL);
         }
-        for (int j = 0; j < Ysize+2; j++) {
-            cells[j][Xsize+1] = new Cell(Cell.Type.WALL);
+        for (int j = 0; j < ySize +2; j++) {
+            cells[j][xSize +1] = new Cell(Cell.Type.WALL);
         }
-        for (int i = 1; i < Ysize+1; i++) {
-            for (int j = 1; j < Xsize+1; j++) {
+        for (int i = 1; i < ySize +1; i++) {
+            for (int j = 1; j < xSize +1; j++) {
                 cells[i][j] = maze[i - 1][j -1 ];
             }
         }
-        cells[input.Y() + 1][input.X() + 1] = new Cell(Cell.Type.INPUT);
-        cells[output.Y() + 1][output.X() + 1] = new Cell(Cell.Type.OUTPUT);
-        return new Maze(cells , new Coordinate(input.X() + 1, input.Y() + 1), new Coordinate(output.X() + 1, output.Y() + 1));
+        cells[input.y() + 1][input.x() + 1] = new Cell(Cell.Type.INPUT);
+        cells[output.y() + 1][output.x() + 1] = new Cell(Cell.Type.OUTPUT);
+        return new Maze(cells , new Coordinate(input.x() + 1, input.y() + 1), new Coordinate(output.x() + 1, output.y() + 1));
     }
 
     private Coordinate getRandomNeighbourCoordinate(Coordinate coord) {
@@ -87,18 +80,15 @@ public final class GrowingThreeMazeState extends GeneratorWithNeighborManager {
         return neighborManager.brakeWall();
     }
 
-    private boolean checkEdgeCoords(Coordinate coordinate){
-        return coordinate.X() != Xsize - 2 && coordinate.X() != 0 && coordinate.Y() != Ysize - 2 && coordinate.Y() != 0;
+    private boolean checkEdgeCoords(Coordinate coordinate) {
+        return coordinate.x() != xSize - 2 && coordinate.x() != 0 && coordinate.y() != ySize - 2 && coordinate.y() != 0;
     }
 
-    private boolean validateCoordsToPoolNeighbourCoords(Coordinate coord){
-        return Maze.isValidCoordinate(coord, Ysize, Xsize)
+    private boolean validateCoordsToPoolNeighbourCoords(Coordinate coord) {
+        return Maze.isValidCoordinate(coord, ySize, xSize)
             && !activeCoords.contains(coord)
-            && maze[coord.Y()][coord.X()].type() != Cell.Type.PASSAGE
-            && maze[coord.Y()][coord.X()].type() != Cell.Type.COIN
-            && maze[coord.Y()][coord.X()].type() != Cell.Type.SWAMP;
+            && maze[coord.y()][coord.x()].type() != Cell.Type.PASSAGE
+            && maze[coord.y()][coord.x()].type() != Cell.Type.COIN
+            && maze[coord.y()][coord.x()].type() != Cell.Type.SWAMP;
     }
-
-
-
 }
