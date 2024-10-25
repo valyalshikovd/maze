@@ -24,6 +24,8 @@ public final class Config {
     public static final String OUTPUT_STRING  = RED_BACKGROUND + WHITE_TEXT + "   " + RESET;
     public static final String SWAMP_STRING = DARK_GREEN_BACKGROUND + WHITE_TEXT + "   " + RESET;
     public static final String COIN_STRING = WHITE_BACKGROUND + YELLOW_TEXT + " ● " + RESET;
+    public static final int NUMBER_OF_GENERATOR = 2;
+    public static final int NUMBER_OF_SOLVER = 2;
 
     //потому что не должен иметь конструктор
     private Config() {

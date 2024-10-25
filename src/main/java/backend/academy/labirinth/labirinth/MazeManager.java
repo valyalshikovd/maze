@@ -31,7 +31,8 @@ public final class MazeManager {
     }
 
     public void start(){
-        Maze maze = generator.generate(30, 30);
-        System.out.println(ObjectFabric.getObject(RendererImpl.class).getCodeMaze(maze));
+
+        outputService.drawWelcoming();
+        outputService.drawDescription();
     }
 }
