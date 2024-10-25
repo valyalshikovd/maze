@@ -4,10 +4,12 @@ import backend.academy.labirinth.labirinth.Cell;
 import backend.academy.labirinth.labirinth.Maze;
 import backend.academy.labirinth.labirinth.generator.cellFactory.CellFactory;
 import backend.academy.labirinth.util.RandomShell;
+import backend.academy.labirinth.util.RandomShellImpl;
+import backend.academy.labirinth.util.juice.ObjectFabric;
 
 public class WallDestroyer {
 
-    public static Maze destroyWalls(Maze maze, RandomShell randomShell, CellFactory cellFactory) {
+    public static Maze destroyWalls(Maze maze) {
 
         Cell[][] cells = maze.getGrid();
 
@@ -18,7 +20,7 @@ public class WallDestroyer {
                     continue;
                 }
 
-                checkNeigbours(cells, i, j, randomShell, cellFactory);
+                checkNeigbours(cells, i, j, ObjectFabric.getObject(RandomShellImpl.class), ObjectFabric.getObject(CellFactory.class));
             }
         }
 

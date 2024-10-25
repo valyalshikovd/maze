@@ -20,7 +20,7 @@ public interface Generator {
     }
 
     Maze generate(int height, int width);
-    StepByStepGenerator getStepByStepGenerator(int height, int width);
+
 //    Maze generate(int height, int width, Side sideInput);
 //    Maze generate(int height, int width, Side sideInput, int coordInput);
 //    Maze generate(int height, int width, Side sideInput, int coordInput, Side sideOutput);

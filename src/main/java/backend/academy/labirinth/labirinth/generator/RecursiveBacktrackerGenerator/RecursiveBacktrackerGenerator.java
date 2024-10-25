@@ -1,5 +1,6 @@
 package backend.academy.labirinth.labirinth.generator.RecursiveBacktrackerGenerator;
 
+import backend.academy.labirinth.labirinth.generator.GeneratingStepByStep;
 import backend.academy.labirinth.labirinth.generator.cellFactory.CellFactory;
 import backend.academy.labirinth.labirinth.Coordinate;
 import backend.academy.labirinth.labirinth.generator.Generator;
@@ -8,7 +9,7 @@ import backend.academy.labirinth.labirinth.generator.StepByStepGenerator;
 import backend.academy.labirinth.util.RandomShell;
 import jakarta.inject.Inject;
 
-public class RecursiveBacktrackerGenerator implements Generator {
+public class RecursiveBacktrackerGenerator implements GeneratingStepByStep {
 
     private final RandomShell random;
     private final CellFactory cellFactory;
