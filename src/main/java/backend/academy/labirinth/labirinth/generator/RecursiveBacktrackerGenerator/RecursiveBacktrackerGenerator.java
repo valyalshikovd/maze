@@ -8,6 +8,10 @@ import backend.academy.labirinth.labirinth.generator.cellFactory.CellFactory;
 import backend.academy.labirinth.util.RandomShell;
 import jakarta.inject.Inject;
 
+/**
+ * Обертка для алгоритма RecursiveBackTracker.
+ * Поддерживает пошаговое отображение состояние алгоритма.
+ */
 public class RecursiveBacktrackerGenerator implements GeneratingStepByStep {
 
     private final RandomShell random;

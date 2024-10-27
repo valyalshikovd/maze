@@ -5,6 +5,9 @@ import backend.academy.labirinth.labirinth.Cell;
 import backend.academy.labirinth.util.RandomShell;
 import jakarta.inject.Inject;
 
+/**
+ * Реализация фабрики ячеек, реализует логику различных поверхноствей
+ */
 @SuppressWarnings("MagicNumber")
 public class ExtendedCellsFactory implements CellFactory {
 

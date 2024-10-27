@@ -6,6 +6,9 @@ import backend.academy.labirinth.labirinth.solver.SolvableStepByStep;
 import backend.academy.labirinth.labirinth.solver.StepByStepSolver;
 import java.util.List;
 
+/**
+ * Обертка для DFS алгоритма.
+ */
 public class DFSSolver implements SolvableStepByStep {
     @Override
     public List<Coordinate> solve(Maze maze) {

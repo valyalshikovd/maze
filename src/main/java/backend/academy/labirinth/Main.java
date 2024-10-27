@@ -1,8 +1,9 @@
 package backend.academy.labirinth;
 
 import backend.academy.labirinth.labirinth.MazeManager;
+import lombok.experimental.UtilityClass;
 
-@SuppressWarnings("HideUtilityClassConstructor")
+@UtilityClass
 public class Main {
 
     public static void main(String[] args) {

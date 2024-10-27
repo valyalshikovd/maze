@@ -7,6 +7,9 @@ import backend.academy.labirinth.labirinth.generator.cellFactory.CellFactory;
 import backend.academy.labirinth.util.RandomShell;
 import jakarta.inject.Inject;
 
+/**
+ * Обертка для алгоритма генерации выращивания дерева.
+ */
 public class GrowingThreeMazeGenerator implements Generator {
 
     private final RandomShell random;

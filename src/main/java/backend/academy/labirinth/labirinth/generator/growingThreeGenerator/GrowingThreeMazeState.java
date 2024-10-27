@@ -9,6 +9,9 @@ import backend.academy.labirinth.util.RandomShell;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.Arrays;
 
+/**
+ * Класс реализующий алгоритм выращивания дерева.
+ */
 @SuppressFBWarnings("CLI_CONSTANT_LIST_INDEX")
 public final class GrowingThreeMazeState extends GeneratorWithNeighborManager {
 

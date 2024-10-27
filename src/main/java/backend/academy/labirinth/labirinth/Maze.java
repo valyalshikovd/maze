@@ -6,6 +6,9 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.Arrays;
 import lombok.Getter;
 
+/**
+ * Класс лабиринта
+ */
 @SuppressWarnings({"MultipleStringLiterals", "MOM_MISLEADING_OVERLOAD_MODEL"})
 @SuppressFBWarnings("MOM_MISLEADING_OVERLOAD_MODEL")
 public final class Maze {

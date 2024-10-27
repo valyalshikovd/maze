@@ -7,6 +7,9 @@ import backend.academy.labirinth.labirinth.wallDestroyer.WallDestroyer;
 import java.util.List;
 import lombok.Getter;
 
+/**
+ * Класс окружения, содержащий конфигурацию алгоритмов и некоторые настройки
+ */
 public class Environment {
     protected Generator generator;
     protected Solver solver;

@@ -80,6 +80,9 @@ public class OutputServiceImpl implements OutputService {
             + "2. Dijkstra's Algorithm (кратчайший путь)");
     }
 
+    /**
+     * Метод создающий окружение
+     */
     @Override
     public Environment drawElectingConfig() {
 

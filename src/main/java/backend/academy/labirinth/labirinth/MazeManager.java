@@ -5,6 +5,9 @@ import backend.academy.labirinth.util.juice.ObjectFabric;
 import com.google.inject.Inject;
 import org.apache.commons.math3.util.Pair;
 
+/**
+ * Класс управления логикой
+ */
 @SuppressWarnings("MultipleStringLiterals")
 public final class MazeManager {
 

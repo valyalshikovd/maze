@@ -11,6 +11,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
+/**
+ * Алгоритм дейкстры, поиск кратчайшего пути. Не имеет возможности пошагового отображения
+ */
 public class DijkstrasAlgorithmSolver implements Solver {
 
     @Override

@@ -11,6 +11,9 @@ import java.util.Stack;
 import lombok.Getter;
 import org.gaul.modernizer_maven_annotations.SuppressModernizer;
 
+/**
+ * DFS алгоритм, поддерживает пошаговое отображение состояния
+ */
 @SuppressFBWarnings("SEO_SUBOPTIMAL_EXPRESSION_ORDER")
 @SuppressModernizer
 public class DFSStepByStepSolverState implements StepByStepSolver {

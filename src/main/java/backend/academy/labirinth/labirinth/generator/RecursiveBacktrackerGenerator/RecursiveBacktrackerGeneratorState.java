@@ -15,6 +15,9 @@ import java.util.Arrays;
 import java.util.Deque;
 import java.util.List;
 
+/**
+ * Обертка для алгоритма Recursive BackTracker
+ */
 @SuppressFBWarnings("CLI_CONSTANT_LIST_INDEX")
 public class RecursiveBacktrackerGeneratorState extends GeneratorWithNeighborManager implements StepByStepGenerator {
 

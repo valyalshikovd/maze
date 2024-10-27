@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 
+/**
+ * Класс расширяющий окружение. Содержит функционал для взаимодействия с алгоритмами отображаемыми пошагово.
+ */
 @SuppressWarnings("MultipleStringLiterals")
 public class EnvironmentStepByStep extends Environment {
 
