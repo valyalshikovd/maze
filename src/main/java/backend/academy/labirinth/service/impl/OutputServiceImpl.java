@@ -341,13 +341,12 @@ public class OutputServiceImpl implements OutputService {
                     );
                     result = true;
                 }
-                result = false;
+                flag = false;
 
             } catch (Exception e) {
                 PrintWriteShell.println(
                     "Ошибка ввода попробуйте снова. "
                 );
-                flag = false;
             }
         }
         return result;
