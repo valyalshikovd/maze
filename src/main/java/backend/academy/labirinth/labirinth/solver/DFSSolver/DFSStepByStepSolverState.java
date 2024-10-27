@@ -5,29 +5,30 @@ import backend.academy.labirinth.labirinth.Coordinate;
 import backend.academy.labirinth.labirinth.Maze;
 import backend.academy.labirinth.labirinth.solver.StepByStepSolver;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
 import java.util.List;
+import java.util.Stack;
 import lombok.Getter;
+import org.gaul.modernizer_maven_annotations.SuppressModernizer;
 
 @SuppressFBWarnings("SEO_SUBOPTIMAL_EXPRESSION_ORDER")
+@SuppressModernizer
 public class DFSStepByStepSolverState implements StepByStepSolver {
 
 
     private Maze maze;
-    private final Deque<Coordinate> stack = new ArrayDeque<>();
+    private final Stack<Coordinate> stack = new Stack<>();
     private final List<Coordinate> visitedCoords = new ArrayList<>();
     @Getter
     private final List<Coordinate> result = new ArrayList<>();
     private Coordinate current;
     private boolean flag = true;
-    private final Deque<Step> steps = new ArrayDeque<>();
+    private final Stack<Step> steps = new Stack<>();
     private Step currStep;
 
     public DFSStepByStepSolverState(Maze maze) {
         this.maze = maze;
-        current = maze.startCoordinate();
+        current = new Coordinate(maze.startCoordinate().x(), maze.startCoordinate().y());
         stack.push(current);
         currStep = new Step(0);
     }
