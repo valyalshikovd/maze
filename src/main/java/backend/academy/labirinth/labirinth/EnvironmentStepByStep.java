@@ -57,8 +57,12 @@ public class EnvironmentStepByStep extends Environment {
         }
         boolean res = stepByStepGenerator.hasNext();
 
-        if (!res && flagSolver) {
-            stepByStepSolver.setMaze(WallDestroyer.destroyWalls(stepByStepGenerator.getMaze()));
+        if (!res) {
+            Maze maze = WallDestroyer.destroyWalls(stepByStepGenerator.getMaze());
+            this.maze = maze;
+            if (flagSolver) {
+                stepByStepSolver.setMaze(maze);
+            }
         }
         return res;
     }
