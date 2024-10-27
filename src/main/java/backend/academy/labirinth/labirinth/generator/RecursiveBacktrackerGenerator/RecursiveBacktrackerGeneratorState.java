@@ -41,7 +41,7 @@ public class RecursiveBacktrackerGeneratorState extends GeneratorWithNeighborMan
         super(
             reductionToOdd(ySIZE),
             reductionToOdd(xSIZE),
-            new Coordinate(inputCoord.x() + 1, inputCoord.y() + 1),
+            new Coordinate(inputCoord.x(), inputCoord.y()),
             outputCoord,
             random,
             cellFactory
