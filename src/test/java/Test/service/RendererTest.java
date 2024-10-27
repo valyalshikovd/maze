@@ -369,7 +369,6 @@ public class RendererTest {
 
         Maze maze = new Maze(cells, null, null);
         String res = renderer.render(maze);
-
         assertEquals(16368, res.length());
 
         String exepted =
