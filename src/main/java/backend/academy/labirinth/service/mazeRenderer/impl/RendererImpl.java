@@ -27,21 +27,22 @@ public class RendererImpl implements Renderer {
 
     private Cell[][] injectPathInMaze(Cell[][] src, List<Coordinate> path) {
         Cell[][] res = Arrays.copyOf(src, src.length);
-        for(Coordinate c : path) {
-            if(res[c.y()][c.x()].type() == Cell.Type.INPUT){
+        for (Coordinate c : path) {
+            if (res[c.y()][c.x()].type() == Cell.Type.INPUT) {
                 continue;
             }
-            res[c.y()][c.x()] = new Cell( Cell.Type.WAY);
+            res[c.y()][c.x()] = new Cell(Cell.Type.WAY);
         }
         return res;
     }
+
     private String getStringMaze(Cell[][] cells) {
         StringBuilder sb = new StringBuilder();
-        for(Cell[] c : cells) {
-            for(Cell cell : c) {
+        for (Cell[] c : cells) {
+            for (Cell cell : c) {
                     sb.append(cell.type().value());
             }
-            sb.append("\n");
+            sb.append('\n');
         }
         return sb.toString();
     }
@@ -53,15 +54,15 @@ public class RendererImpl implements Renderer {
     public String getCodeMaze(Maze maze) {
         StringBuilder sb = new StringBuilder();
         sb.append("new Cell[][]{");
-        for(Cell[] c : maze.getGrid()) {
+        for (Cell[] c : maze.getGrid()) {
             sb.append("new Cell[]{");
-            for(Cell cell : c) {
-                sb.append("new Cell(Cell.Type." + cell.type()+"),");
+            for (Cell cell : c) {
+                sb.append("new Cell(Cell.Type." + cell.type() + "),");
             }
             sb.append("},");
         }
-        sb.deleteCharAt(sb.length()-1);
-        sb.append("}");
+        sb.deleteCharAt(sb.length() - 1);
+        sb.append('}');
         return sb.toString();
     }
 }

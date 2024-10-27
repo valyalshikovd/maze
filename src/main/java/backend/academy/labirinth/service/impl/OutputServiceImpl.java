@@ -13,17 +13,18 @@ import backend.academy.labirinth.labirinth.solver.DFSSolver.DFSSolver;
 import backend.academy.labirinth.labirinth.solver.Solver;
 import backend.academy.labirinth.labirinth.solver.dijkstrasAlgorithmSolver.DijkstrasAlgorithmSolver;
 import backend.academy.labirinth.service.ConsoleInputService;
-import backend.academy.labirinth.service.mazeRenderer.Renderer;
 import backend.academy.labirinth.service.OutputService;
+import backend.academy.labirinth.service.mazeRenderer.Renderer;
 import backend.academy.labirinth.service.output.PrintWriteShell;
 import backend.academy.labirinth.util.juice.ObjectFabric;
 import com.google.inject.Inject;
-import org.apache.commons.math3.util.Pair;
-
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.List;
 import java.util.Objects;
+import org.apache.commons.math3.util.Pair;
 
-@SuppressWarnings("MultipleStringLiterals")
+@SuppressWarnings({"MultipleStringLiterals", "MagicNumber"})
+@SuppressFBWarnings("FCCD_FIND_CLASS_CIRCULAR_DEPENDENCY")
 public class OutputServiceImpl implements OutputService {
 
     private final Renderer renderer;
@@ -56,31 +57,27 @@ public class OutputServiceImpl implements OutputService {
     @Override
     public void drawWelcoming() {
         PrintWriteShell.println(
-                "██╗░░░░░░█████╗░██████╗░██╗░░░██╗██████╗░██╗███╗░░██╗████████╗██╗░░██╗░██████╗\n" +
-                "██║░░░░░██╔══██╗██╔══██╗╚██╗░██╔╝██╔══██╗██║████╗░██║╚══██╔══╝██║░░██║██╔════╝\n" +
-                "██║░░░░░███████║██████╦╝░╚████╔╝░██████╔╝██║██╔██╗██║░░░██║░░░███████║╚█████╗░\n" +
-                "██║░░░░░██╔══██║██╔══██╗░░╚██╔╝░░██╔══██╗██║██║╚████║░░░██║░░░██╔══██║░╚═══██╗\n" +
-                "███████╗██║░░██║██████╦╝░░░██║░░░██║░░██║██║██║░╚███║░░░██║░░░██║░░██║██████╔╝\n" +
-                "╚══════╝╚═╝░░╚═╝╚═════╝░░░░╚═╝░░░╚═╝░░╚═╝╚═╝╚═╝░░╚══╝░░░╚═╝░░░╚═╝░░╚═╝╚═════╝░"
+                "██╗░░░░░░█████╗░██████╗░██╗░░░██╗██████╗░██╗███╗░░██╗████████╗██╗░░██╗░██████╗\n"
+                    + "██║░░░░░██╔══██╗██╔══██╗╚██╗░██╔╝██╔══██╗██║████╗░██║╚══██╔══╝██║░░██║██╔════╝\n"
+                    + "██║░░░░░███████║██████╦╝░╚████╔╝░██████╔╝██║██╔██╗██║░░░██║░░░███████║╚█████╗░\n"
+                    + "██║░░░░░██╔══██║██╔══██╗░░╚██╔╝░░██╔══██╗██║██║╚████║░░░██║░░░██╔══██║░╚═══██╗\n"
+                    + "███████╗██║░░██║██████╦╝░░░██║░░░██║░░██║██║██║░╚███║░░░██║░░░██║░░██║██████╔╝\n"
+                    + "╚══════╝╚═╝░░╚═╝╚═════╝░░░░╚═╝░░░╚═╝░░╚═╝╚═╝╚═╝░░╚══╝░░░╚═╝░░░╚═╝░░╚═╝╚═════╝░"
         );
     }
 
     @Override
     public void drawDescription() {
-        PrintWriteShell.println("Вы можете сгенерировать и решить созданные лабиринты. \n" +
-            "Реализованы следующие алгоритмы генерации: \n" +
-            "1. Growing Three Generator \n" +
-            "2. Recursive Back Tracker Generator (Step by step)\n" +
-            "Эти алгоритмы, по умолчанию, создают лабиринты без циклов, но при желании можно добавить циклы, в этом случае доступен только алгоритм Дейкстры  \n" +
-            "По умолчанию система поверхностей отсутствует, но при желании можно включить ее при генерации:  \n" +
-            "Реализованы следующие алгоритмы поиска пути: \n" +
-            "1. DFS solver (первый найденный путь) \n" +
-            "2. Dijkstra's Algorithm (кратчайший путь)");
-    }
-
-    @Override
-    public void drawEnteringMaze(Maze maze) {
-
+        PrintWriteShell.println("Вы можете сгенерировать и решить созданные лабиринты. \n"
+            + "Реализованы следующие алгоритмы генерации: \n"
+            + "1. Growing Three Generator \n"
+            + "2. Recursive Back Tracker Generator (Step by step)\n"
+            + "Эти алгоритмы, по умолчанию, создают лабиринты без циклов, "
+            + "но при желании можно добавить циклы, в этом случае доступен только алгоритм Дейкстры  \n"
+            + "По умолчанию система поверхностей отсутствует, но при желании можно включить ее при генерации:  \n"
+            + "Реализованы следующие алгоритмы поиска пути: \n"
+            + "1. DFS solver (первый найденный путь) \n"
+            + "2. Dijkstra's Algorithm (кратчайший путь)");
     }
 
     @Override
@@ -90,18 +87,19 @@ public class OutputServiceImpl implements OutputService {
         Generator generator = null;
         boolean stepByStepGenerator = false;
         switch (numAlg) {
-            case 1 : {
+            case 1: {
                 generator = ObjectFabric.getObject(GrowingThreeMazeGenerator.class);
                 break;
             }
-            case 2 : {
+            case 2: {
                 stepByStepGenerator = enteringStepByStepGenerator();
                 generator = ObjectFabric.getObject(RecursiveBacktrackerGenerator.class);
                 break;
             }
-            default : {}
-        };
-
+            default: {
+                break;
+            }
+        }
         boolean loopFlags = enteringLoops();
 
 
@@ -109,80 +107,84 @@ public class OutputServiceImpl implements OutputService {
 
         Solver solver = null;
         if (loopFlags) {
-
             solver = ObjectFabric.getObject(DijkstrasAlgorithmSolver.class);
 
         } else {
-            switch (getNumSolver()){
-                case 1:
-                {
+            switch (getNumSolver()) {
+                case 1: {
                     stepByStepSolver = enteringStepByStepSolver();
                     solver = ObjectFabric.getObject(DFSSolver.class);
                     break;
                 }
-                case 2:
-                {
+                case 2: {
                     solver = ObjectFabric.getObject(DijkstrasAlgorithmSolver.class);
+                    break;
+                }
+                default: {
                     break;
                 }
             }
         }
-
-        if(stepByStepSolver || stepByStepGenerator){
-
+        if (stepByStepSolver || stepByStepGenerator) {
             return new EnvironmentStepByStep(generator, solver, loopFlags, stepByStepSolver, stepByStepGenerator);
-
         }
-
         return new Environment(generator, solver, loopFlags);
-
     }
 
     @Override
     public int getCountSteps() {
-        try {
-            PrintWriteShell.println(
-                "Введите количество шагов: \n \"1\" - 1 \n \"2\" - 10 \n \"3\" - 100 "
-            );
-            int res = consoleInputService.getInt();
-            if (res != 1 && res != 2 && res != 3) {
-                throw new ConsolInputException("Invalid entering");
+        int num = 0;
+        boolean flag = true;
+        while (flag) {
+            try {
+                PrintWriteShell.println(
+                    "Введите количество шагов: \n \"1\" - 1 \n \"2\" - 10 \n \"3\" - 100 "
+                );
+                int res = consoleInputService.getInt();
+                if (res != 1 && res != 2 && res != 3) {
+                    throw new ConsolInputException("Invalid entering");
+                }
+                num = switch (res) {
+                    case 1 -> 1;
+                    case 2 -> 10;
+                    case 3 -> 100;
+                    default -> 0;
+                };
+                flag = false;
+            } catch (ConsolInputException e) {
+                PrintWriteShell.println(
+                    "Ошибка ввода попробуйте снова. "
+                );
             }
-            return switch (res) {
-                case 1 -> 1;
-                case 2 -> 10;
-                case 3 -> 100;
-                default -> 0;
-            };
-        } catch (ConsolInputException e) {
-            PrintWriteShell.println(
-                "Ошибка ввода попробуйте снова. "
-            );
-            return getCountSteps();
         }
+        return num;
     }
 
     @Override
     public Pair<Integer, Integer> getMazeSize() {
-        try {
-            PrintWriteShell.println(
-                "Введите высоту лабиринта: "
-            );
-            int y = consoleInputService.getInt();
+        boolean flag = true;
+        Pair<Integer, Integer> result = null;
+        while (flag) {
+            try {
+                PrintWriteShell.println(
+                    "Введите высоту лабиринта: "
+                );
+                int y = consoleInputService.getInt();
 
-            PrintWriteShell.println(
-                "Введите ширина лабиринта: "
-            );
-            int x = consoleInputService.getInt();
+                PrintWriteShell.println(
+                    "Введите ширина лабиринта: "
+                );
+                int x = consoleInputService.getInt();
 
-            return new Pair<>(x, y);
-
-        }catch (ConsolInputException e){
-            PrintWriteShell.println(
-                "Ошибка ввода попробуйте снова. "
-            );
-            return getMazeSize();
+                result = new Pair<>(x, y);
+                flag = false;
+            } catch (ConsolInputException e) {
+                PrintWriteShell.println(
+                    "Ошибка ввода попробуйте снова. "
+                );
+            }
         }
+        return result;
     }
 
     @Override
@@ -192,184 +194,231 @@ public class OutputServiceImpl implements OutputService {
 
     @Override
     public boolean drawEnteringContinue() {
-        try {
-            PrintWriteShell.println(
-                "Желаете ли продолжить? (\"+\" - если да, иначе любой другой символ): "
-            );
+        boolean result = false;
+        boolean flag = true;
+        while (flag) {
+            try {
+                PrintWriteShell.println(
+                    "Желаете ли продолжить? (\"+\" - если да, иначе любой другой символ): "
+                );
 
-            String s = consoleInputService.getString();
+                String s = consoleInputService.getString();
 
-            return s.equals("+");
+                result = "+".equals(s);
+                flag = false;
 
-        } catch (Exception e) {
-            PrintWriteShell.println(
-                "Ошибка ввода попробуйте снова. "
-            );
-            return drawEnteringContinue();
+            } catch (Exception e) {
+                PrintWriteShell.println(
+                    "Ошибка ввода попробуйте снова. "
+                );
+            }
         }
+        return result;
 
     }
 
     @Override
     public boolean drawEnteringRequestNewEnvironment() {
-        try {
-            PrintWriteShell.println(
-                "Желаете ли вы оставить текущую конфигурацию (\"+\" - если да, иначе любой другой символ): "
-            );
-            String s = consoleInputService.getString();
+        boolean result = false;
+        boolean flag = true;
+        while (flag) {
+            try {
+                PrintWriteShell.println(
+                    "Желаете ли вы оставить текущую конфигурацию (\"+\" - если да, иначе любой другой символ): "
+                );
+                String s = consoleInputService.getString();
 
-            return Objects.equals(s, "+");
+                result =  Objects.equals(s, "+");
+                flag = false;
+            } catch (ConsolInputException e) {
+                PrintWriteShell.println(
+                    "Ошибка ввода попробуйте снова. "
+                );
 
-        } catch (ConsolInputException e) {
-            PrintWriteShell.println(
-                "Ошибка ввода попробуйте снова. "
-            );
-            return drawEnteringRequestNewEnvironment();
+            }
         }
+        return result;
     }
 
     @Override
     public boolean drawEnteringRequestCoordinate() {
-        try {
-            PrintWriteShell.println(
-                "Желаете ли вы в ручную ввести координаты входа/выхода (\"+\" - если да, иначе любой другой символ): "
-            );
-            String s = consoleInputService.getString();
+        boolean result = false;
+        boolean flag = true;
+        while (flag) {
+            try {
+                PrintWriteShell.println(
+                    "Желаете ли вы в ручную ввести координаты входа/выхода"
+                        + " (\"+\" - если да, иначе любой другой символ): "
+                );
+                String s = consoleInputService.getString();
 
-            return Objects.equals(s, "+");
+                result = Objects.equals(s, "+");
+                flag = false;
 
-        }catch (ConsolInputException e){
-            PrintWriteShell.println(
-                "Ошибка ввода попробуйте снова. "
-            );
-            return enteringStepByStepSolver();
+            } catch (ConsolInputException e) {
+                PrintWriteShell.println(
+                    "Ошибка ввода попробуйте снова. "
+                );
+            }
         }
+        return result;
     }
 
     @Override
     public Coordinate drawEnteringCoordinate() {
-        try {
-            PrintWriteShell.println(
-                "Введите координату x: "
-            );
-            int y = consoleInputService.getInt();
+        Coordinate coordinate = null;
+        boolean flag = true;
+        while (flag) {
+            try {
+                PrintWriteShell.println(
+                    "Введите координату x: "
+                );
+                int y = consoleInputService.getInt();
 
-            PrintWriteShell.println(
-                "Введите координату y: "
-            );
-            int x = consoleInputService.getInt();
+                PrintWriteShell.println(
+                    "Введите координату y: "
+                );
+                int x = consoleInputService.getInt();
 
-            return new Coordinate(x, y);
-
-        } catch (ConsolInputException e) {
-            PrintWriteShell.println(
-                "Ошибка ввода попробуйте снова. "
-            );
-            return drawEnteringCoordinate();
+                coordinate = new Coordinate(x, y);
+                flag = false;
+            } catch (ConsolInputException e) {
+                PrintWriteShell.println(
+                    "Ошибка ввода попробуйте снова. "
+                );
+            }
         }
+        return coordinate;
     }
 
     @Override
     public void drawStepDescription() {
-        PrintWriteShell.println(Config.WAY_STRING + " - вход/найденный путь, " + Config.OUTPUT_STRING + " - выход, " + Config.COIN_STRING + " - монетка(ускоряет), " + Config.SWAMP_STRING + " - болото(замедляет)");
+        PrintWriteShell.println(Config.WAY_STRING + " - вход/найденный путь, "
+            + Config.OUTPUT_STRING + " - выход, " + Config.COIN_STRING + " - монетка(ускоряет), "
+            + Config.SWAMP_STRING + " - болото(замедляет)");
     }
 
-    private int getNumGen(){
-        try {
-            PrintWriteShell.println(
-                "Введите номер алгоритма генерации: "
-            );
-            int numAlg = consoleInputService.getInt();
-
-            if (numAlg < 0 || numAlg > Config.NUMBER_OF_GENERATOR) {
-                throw new ConsolInputException("incorrect alg num");
-            }
-
-            return numAlg;
-
-        }catch (ConsolInputException e) {
-            PrintWriteShell.println(
-                "Ошибка ввода попробуйте снова. "
-            );
-            return getNumGen();
-        }
-    }
-
-    private boolean enteringLoops(){
-        try {
-            PrintWriteShell.println(
-                "Желаете ли добавить циклы в лабиринт (\"+\" - если да, иначе любой другой символ): "
-            );
-            String s = consoleInputService.getString();
-
-            if (Objects.equals(s, "+")) {
+    private int getNumGen() {
+        int num = 0;
+        boolean flag = true;
+        while (flag) {
+            try {
                 PrintWriteShell.println(
-                    "Предупреждуние: В таком случае для нахождения кратчайшего пути имеет смысл только алгоритм Дейксты."
+                    "Введите номер алгоритма генерации: "
                 );
-                return true;
+                int numAlg = consoleInputService.getInt();
+
+                if (numAlg < 0 || numAlg > Config.NUMBER_OF_GENERATOR) {
+                    throw new ConsolInputException("incorrect alg num");
+                }
+
+                num = numAlg;
+                flag = false;
+
+            } catch (ConsolInputException e) {
+                PrintWriteShell.println(
+                    "Ошибка ввода попробуйте снова. "
+                );
             }
-            return false;
-
-        }catch (Exception e){
-            PrintWriteShell.println(
-                "Ошибка ввода попробуйте снова. "
-            );
-            return enteringLoops();
         }
+        return num;
     }
 
-    private int getNumSolver(){
-        try {
-            PrintWriteShell.println(
-                "Введите номер алгоритма поиска решения: "
-            );
-            int numAlg = consoleInputService.getInt();
+    private boolean enteringLoops() {
+        boolean result = false;
+        boolean flag = true;
+        while (flag) {
+            try {
+                PrintWriteShell.println(
+                    "Желаете ли добавить циклы в лабиринт (\"+\" - если да, иначе любой другой символ): "
+                );
+                String s = consoleInputService.getString();
 
-            if (numAlg < 0 || numAlg > Config.NUMBER_OF_GENERATOR) {
-                throw new ConsolInputException("incorrect alg num");
+                if (Objects.equals(s, "+")) {
+                    PrintWriteShell.println(
+                        "Предупреждуние: В таком случае для нахождения "
+                            + "кратчайшего пути имеет смысл только алгоритм Дейксты."
+                    );
+                    result = true;
+                }
+                result = false;
+
+            } catch (Exception e) {
+                PrintWriteShell.println(
+                    "Ошибка ввода попробуйте снова. "
+                );
+                flag = false;
             }
-
-            return numAlg;
-
-        }catch (ConsolInputException e) {
-            PrintWriteShell.println(
-                "Ошибка ввода попробуйте снова. "
-            );
-            return getNumSolver();
         }
+        return result;
     }
 
-    private boolean enteringStepByStepGenerator(){
-        try {
-            PrintWriteShell.println(
-                "Желаете ли вы применить пошаговый генератор (\"+\" - если да, иначе любой другой символ): "
-            );
-            String s = consoleInputService.getString();
+    private int getNumSolver() {
+        int num = 0;
+        boolean flag = true;
+        while (flag) {
+            try {
+                PrintWriteShell.println(
+                    "Введите номер алгоритма поиска решения: "
+                );
+                int numAlg = consoleInputService.getInt();
 
-            return Objects.equals(s, "+");
+                if (numAlg < 0 || numAlg > Config.NUMBER_OF_GENERATOR) {
+                    throw new ConsolInputException("incorrect alg num");
+                }
+                num = numAlg;
+                flag = false;
 
-        }catch (ConsolInputException e){
-            PrintWriteShell.println(
-                "Ошибка ввода попробуйте снова. "
-            );
-            return enteringStepByStepGenerator();
+            } catch (ConsolInputException e) {
+                PrintWriteShell.println(
+                    "Ошибка ввода попробуйте снова. "
+                );
+            }
         }
+        return num;
     }
 
-    private boolean enteringStepByStepSolver(){
-        try {
-            PrintWriteShell.println(
-                "Желаете ли вы применить пошаговый solver (\"+\" - если да, иначе любой другой символ): "
-            );
-            String s = consoleInputService.getString();
+    private boolean enteringStepByStepGenerator() {
+        boolean result = false;
+        boolean flag = true;
+        while (flag) {
+            try {
+                PrintWriteShell.println(
+                    "Желаете ли вы применить пошаговый генератор (\"+\" - если да, иначе любой другой символ): "
+                );
+                String s = consoleInputService.getString();
 
-            return Objects.equals(s, "+");
+                result = Objects.equals(s, "+");
+                flag = false;
 
-        }catch (ConsolInputException e){
-            PrintWriteShell.println(
-                "Ошибка ввода попробуйте снова. "
-            );
-            return enteringStepByStepSolver();
+            } catch (ConsolInputException e) {
+                PrintWriteShell.println(
+                    "Ошибка ввода попробуйте снова. "
+                );
+            }
         }
+        return result;
+    }
+
+    private boolean enteringStepByStepSolver() {
+        boolean result = false;
+        boolean flag = true;
+        while (flag) {
+            try {
+                PrintWriteShell.println(
+                    "Желаете ли вы применить пошаговый solver (\"+\" - если да, иначе любой другой символ): "
+                );
+                String s = consoleInputService.getString();
+
+                result = Objects.equals(s, "+");
+                flag = false;
+
+            } catch (ConsolInputException e) {
+                PrintWriteShell.println(
+                    "Ошибка ввода попробуйте снова. "
+                );
+            }
+        }
+        return result;
     }
 }

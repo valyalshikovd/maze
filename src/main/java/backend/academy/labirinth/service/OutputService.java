@@ -3,10 +3,11 @@ package backend.academy.labirinth.service;
 import backend.academy.labirinth.labirinth.Coordinate;
 import backend.academy.labirinth.labirinth.Environment;
 import backend.academy.labirinth.labirinth.Maze;
-import org.apache.commons.math3.util.Pair;
 import java.util.List;
+import org.apache.commons.math3.util.Pair;
 
 public interface OutputService {
+
     void drawMaze(Maze maze);
 
     void drawMaze(Maze maze, List<Coordinate> path);
@@ -16,8 +17,6 @@ public interface OutputService {
     void drawWelcoming();
 
     void drawDescription();
-
-    void drawEnteringMaze(Maze maze);
 
     Environment drawElectingConfig();
 

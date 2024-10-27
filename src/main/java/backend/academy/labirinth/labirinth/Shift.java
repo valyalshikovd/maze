@@ -1,7 +1,7 @@
 package backend.academy.labirinth.labirinth;
 
-import lombok.Getter;
 import java.util.List;
+import lombok.Getter;
 
 @Getter
 public class Shift {
@@ -22,7 +22,7 @@ public class Shift {
         this.y = y;
     }
 
-    public Coordinate getShiftedCoordinate(Coordinate coordinate){
+    public Coordinate getShiftedCoordinate(Coordinate coordinate) {
         return new Coordinate(coordinate.x() + x, coordinate.y() + y);
     }
 }

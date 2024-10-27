@@ -13,8 +13,6 @@ import java.util.PriorityQueue;
 
 public class DijkstrasAlgorithmSolver implements Solver {
 
-    private record CellInfo(Coordinate coordinate, int distance) {
-    }
     @Override
     public List<Coordinate> solve(Maze maze) {
 
@@ -68,13 +66,12 @@ public class DijkstrasAlgorithmSolver implements Solver {
         }
         List<Coordinate> path = new ArrayList<>();
         Coordinate current = new Coordinate(maze.endCoordinate().x(), maze.endCoordinate().y());
-        while (current != null) {
+        do {
             path.add(current);
             current = prev[current.y()][current.x()];
-        }
+        } while (current != null);
         Collections.reverse(path);
         return path;
-
     }
 
     private boolean validateCoord(Coordinate coordinate, Maze maze) {
@@ -89,5 +86,8 @@ public class DijkstrasAlgorithmSolver implements Solver {
 
     @Override public String toString() {
         return "DijkstrasAlgorithmSolver";
+    }
+
+    private record CellInfo(Coordinate coordinate, int distance) {
     }
 }

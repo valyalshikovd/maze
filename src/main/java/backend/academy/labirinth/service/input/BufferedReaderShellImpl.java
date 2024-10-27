@@ -3,13 +3,11 @@ package backend.academy.labirinth.service.input;
 import backend.academy.labirinth.config.Config;
 import backend.academy.labirinth.exception.ConsolInputException;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 @SuppressWarnings("MultipleStringLiterals")
-
 public class BufferedReaderShellImpl implements BufferedReaderShell {
 
     private BufferedReader reader;

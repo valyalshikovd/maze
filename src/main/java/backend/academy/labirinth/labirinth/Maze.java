@@ -2,9 +2,12 @@ package backend.academy.labirinth.labirinth;
 
 import backend.academy.labirinth.exception.InvalidCoordinate;
 import backend.academy.labirinth.exception.InvalidMaze;
-import lombok.Getter;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.Arrays;
+import lombok.Getter;
 
+@SuppressWarnings({"MultipleStringLiterals", "MOM_MISLEADING_OVERLOAD_MODEL"})
+@SuppressFBWarnings("MOM_MISLEADING_OVERLOAD_MODEL")
 public final class Maze {
     @Getter
     private final int height;
@@ -44,7 +47,7 @@ public final class Maze {
     }
 
     public void setCell(Coordinate coordinate, Cell cell) {
-        if(!isValidCoordinate(coordinate)) {
+        if (!isValidCoordinate(coordinate)) {
             throw new InvalidCoordinate("invalid coordinate");
         }
         grid[coordinate.y()][coordinate.x()] = cell;
@@ -52,21 +55,21 @@ public final class Maze {
 
     public Cell[][] getGrid() {
         Cell[][] res = new Cell[height][];
-        for(int i = 0; i < height; i++){
+        for (int i = 0; i < height; i++) {
             res[i] = Arrays.copyOf(grid[i], grid[i].length);
         }
         return res;
     }
 
     public Cell getCell(Coordinate coordinate) {
-        if(!isValidCoordinate(coordinate)) {
+        if (!isValidCoordinate(coordinate)) {
             throw new InvalidCoordinate("invalid coordinate");
         }
         return grid[coordinate.y()][coordinate.x()];
     }
 
     public Cell getCell(int x, int y) {
-        if(!isValidCoordinate(new Coordinate(x, y))) {
+        if (!isValidCoordinate(new Coordinate(x, y))) {
             throw new InvalidCoordinate("invalid coordinate");
         }
         return grid[y][x];
@@ -76,15 +79,6 @@ public final class Maze {
         return coordinate.y() > 0 && coordinate.y() < width && coordinate.x() > 0 && coordinate.x() < height;
     }
 
-    public Coordinate getValidCoordinate(Coordinate coordinate) {
-        return getValidCoordinate(coordinate, height, width);
-    }
-    public static Coordinate getValidCoordinate(Coordinate coordinate, int height, int width) {
-        if(isValidCoordinate(coordinate, height, width)) {
-            return coordinate;
-        }
-        return null;
-    }
     public static boolean isValidCoordinate(Coordinate coordinate, int height, int width) {
         return coordinate.y() > -1 && coordinate.x() < width && coordinate.x() > -1 && coordinate.y()  < height;
     }

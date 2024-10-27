@@ -3,11 +3,16 @@ package backend.academy.labirinth.labirinth.generator;
 import backend.academy.labirinth.labirinth.Cell;
 import backend.academy.labirinth.labirinth.Coordinate;
 import backend.academy.labirinth.labirinth.Maze;
+import backend.academy.labirinth.labirinth.generator.cellFactory.CellFactory;
 import backend.academy.labirinth.util.RandomShell;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 
+/**
+ * класс, имеющий в своей струкруте логику разрушения стен к соседям клетки.
+ * Подобная логика требуется в обоих реализованных алгоритмах генерации, поэтому выведена в отдельный класс.
+ */
 public abstract class GeneratorWithNeighborManager {
 
     protected int ySize;
@@ -18,14 +23,17 @@ public abstract class GeneratorWithNeighborManager {
     protected List<Coordinate> activeCoords = new ArrayList<>();
     protected final Cell[][] maze;
     protected Maze actualMaze;
+    protected final CellFactory cellFactory;
 
     protected GeneratorWithNeighborManager(int ySize,
-        int xSize, Coordinate input, Coordinate output, RandomShell random) {
+        int xSize, Coordinate input, Coordinate output, RandomShell random, CellFactory cellFactory
+    ) {
         this.ySize = ySize;
         this.xSize = xSize;
         this.input = input;
         this.output = output;
         this.random = random;
+        this.cellFactory = cellFactory;
         this.maze = new Cell[this.ySize][this.xSize];
     }
 
@@ -39,6 +47,9 @@ public abstract class GeneratorWithNeighborManager {
         return neighborManager.brakeWall();
     }
 
+    /**
+     * класс, реализующий логику взаимодествия с клетками соседями.
+     */
     protected class NeighborManager {
         @Getter
         private final List<Coordinate> neighbors = new ArrayList<>();
@@ -63,25 +74,29 @@ public abstract class GeneratorWithNeighborManager {
             if (neighbors.isEmpty()) {
                 return null;
             }
-            Coordinate res = neighbors.get(random.get(neighbors.size()));
+            Coordinate neighbor = neighbors.get(random.get(neighbors.size()));
+            Coordinate res = null;
 
-            if (res.y() > currentCoord.y()) {
-                maze[currentCoord.y() + 1][currentCoord.x()] = new Cell(Cell.Type.PASSAGE);
+            if (neighbor.y() > currentCoord.y()) {
+                maze[currentCoord.y() + 1][currentCoord.x()] = cellFactory.getPassageCell();
+                res = neighbor;
+            }
+            if (neighbor.y() < currentCoord.y()) {
+                maze[currentCoord.y() - 1][currentCoord.x()] = cellFactory.getPassageCell();
+                res = neighbor;
+            }
+            if (neighbor.x() > currentCoord.x() && res == null) {
+                maze[currentCoord.y()][currentCoord.x() + 1] = cellFactory.getPassageCell();
+                res = neighbor;
+            }
+            if (neighbor.x() < currentCoord.x() && res == null) {
+                maze[currentCoord.y()][currentCoord.x() - 1] = cellFactory.getPassageCell();
+                res = neighbor;
+            }
+            if (res != null) {
                 return res;
             }
-            if (res.y() < currentCoord.y()) {
-                maze[currentCoord.y() - 1][currentCoord.x()] = new Cell(Cell.Type.PASSAGE);
-                return res;
-            }
-            if (res.x() > currentCoord.x()) {
-                maze[currentCoord.y()][currentCoord.x()  +1] = new Cell(Cell.Type.PASSAGE);
-                return res;
-            }
-            if (res.x() < currentCoord.x()) {
-                maze[currentCoord.y()][currentCoord.x() - 1] = new Cell(Cell.Type.PASSAGE);
-                return res;
-            }
-            neighbors.remove(res);
+            neighbors.remove(neighbor);
             return null;
         }
     }

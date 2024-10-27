@@ -7,8 +7,11 @@ import java.util.List;
 public interface StepByStepSolver {
 
     boolean hasNext();
+
     List<Coordinate> next();
+
     void setMaze(Maze maze);
+
     Maze getMaze();
 
 }

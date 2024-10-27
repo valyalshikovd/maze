@@ -1,12 +1,10 @@
 package backend.academy.labirinth.util.juice;
 
-
-
-import backend.academy.labirinth.labirinth.generator.cellFactory.CellFactory;
-import backend.academy.labirinth.labirinth.solver.DFSSolver.DFSSolver;
-import backend.academy.labirinth.labirinth.generator.cellFactory.ExtendedCellsFactory;
 import backend.academy.labirinth.labirinth.generator.Generator;
 import backend.academy.labirinth.labirinth.generator.RecursiveBacktrackerGenerator.RecursiveBacktrackerGenerator;
+import backend.academy.labirinth.labirinth.generator.cellFactory.CellFactory;
+import backend.academy.labirinth.labirinth.generator.cellFactory.ExtendedCellsFactory;
+import backend.academy.labirinth.labirinth.solver.DFSSolver.DFSSolver;
 import backend.academy.labirinth.labirinth.solver.Solver;
 import backend.academy.labirinth.service.ConsoleInputService;
 import backend.academy.labirinth.service.OutputService;

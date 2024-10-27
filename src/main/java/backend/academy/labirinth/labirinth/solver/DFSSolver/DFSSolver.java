@@ -4,7 +4,6 @@ import backend.academy.labirinth.labirinth.Coordinate;
 import backend.academy.labirinth.labirinth.Maze;
 import backend.academy.labirinth.labirinth.solver.SolvableStepByStep;
 import backend.academy.labirinth.labirinth.solver.StepByStepSolver;
-
 import java.util.List;
 
 public class DFSSolver implements SolvableStepByStep {

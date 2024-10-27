@@ -1,23 +1,28 @@
 package backend.academy.labirinth.labirinth.solver.DFSSolver;
 
-import backend.academy.labirinth.labirinth.*;
+import backend.academy.labirinth.labirinth.Cell;
+import backend.academy.labirinth.labirinth.Coordinate;
+import backend.academy.labirinth.labirinth.Maze;
 import backend.academy.labirinth.labirinth.solver.StepByStepSolver;
-import lombok.Getter;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
-import java.util.Stack;
+import lombok.Getter;
 
+@SuppressFBWarnings("SEO_SUBOPTIMAL_EXPRESSION_ORDER")
 public class DFSStepByStepSolverState implements StepByStepSolver {
 
 
     private Maze maze;
-    private final Stack<Coordinate> stack = new Stack<>();
+    private final Deque<Coordinate> stack = new ArrayDeque<>();
     private final List<Coordinate> visitedCoords = new ArrayList<>();
     @Getter
     private final List<Coordinate> result = new ArrayList<>();
     private Coordinate current;
     private boolean flag = true;
-    private final Stack<Step> steps = new Stack<>();
+    private final Deque<Step> steps = new ArrayDeque<>();
     private Step currStep;
 
     public DFSStepByStepSolverState(Maze maze) {
@@ -42,6 +47,9 @@ public class DFSStepByStepSolverState implements StepByStepSolver {
         return maze;
     }
 
+    /**
+     * этот метод вызывает SEO_SUBOPTIMAL_EXPRESSION_ORDER
+     */
     public boolean hasNext() {
         return !current.equals(maze.endCoordinate()) && flag;
     }
@@ -63,14 +71,14 @@ public class DFSStepByStepSolverState implements StepByStepSolver {
 
         if (neighbours.isEmpty()) {
             steps.push(currStep);
-            if(steps.peek().numNeigh == 0 ){
+            if (steps.peek().numNeigh == 0) {
                 result.removeAll(steps.pop().coord);
-                if(!steps.isEmpty()){
+                if (!steps.isEmpty()) {
                     steps.peek().numNeigh--;
                 }
             }
             while (!steps.isEmpty() && steps.peek().numNeigh < 1) {
-                if (steps.peek().numNeigh == 0 ){
+                if (steps.peek().numNeigh == 0) {
                     result.removeAll(steps.pop().coord);
                 }
                 if (!steps.isEmpty() && steps.peek().numNeigh > 0) {
