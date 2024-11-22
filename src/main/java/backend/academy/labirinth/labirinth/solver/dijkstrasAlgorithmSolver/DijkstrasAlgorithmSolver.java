@@ -1,6 +1,6 @@
 package backend.academy.labirinth.labirinth.solver.dijkstrasAlgorithmSolver;
 
-import backend.academy.labirinth.labirinth.Cell;
+import backend.academy.labirinth.labirinth.CellType;
 import backend.academy.labirinth.labirinth.Coordinate;
 import backend.academy.labirinth.labirinth.Maze;
 import backend.academy.labirinth.labirinth.Shift;
@@ -21,7 +21,7 @@ public class DijkstrasAlgorithmSolver implements Solver {
 
         int height = maze.height();
         int width = maze.width();
-        Cell[][] grid = maze.getGrid();
+        CellType[][] grid = maze.getGrid();
 
         int[][] dist = new int[height][width];
         for (int i = 0; i < height; i++) {
@@ -55,7 +55,7 @@ public class DijkstrasAlgorithmSolver implements Solver {
 
                 int newDist =
                     dist[currentCoordinate.y()][currentCoordinate.x()]
-                        + grid[neighbor.y()][neighbor.x()].type().weight();
+                        + grid[neighbor.y()][neighbor.x()].weight();
 
                 if (newDist < dist[neighbor.y()][neighbor.x()]) {
                     dist[neighbor.y()][neighbor.x()] = newDist;
@@ -80,10 +80,10 @@ public class DijkstrasAlgorithmSolver implements Solver {
     private boolean validateCoord(Coordinate coordinate, Maze maze) {
         return
             maze.isValidCoordinate(coordinate)
-                && (maze.getCell(coordinate).type() == Cell.Type.PASSAGE
-                || maze.getCell(coordinate).type() == Cell.Type.OUTPUT
-                || maze.getCell(coordinate).type() == Cell.Type.SWAMP
-                || maze.getCell(coordinate).type() == Cell.Type.COIN
+                && (maze.getCell(coordinate) == CellType.PASSAGE
+                || maze.getCell(coordinate) == CellType.OUTPUT
+                || maze.getCell(coordinate) == CellType.SWAMP
+                || maze.getCell(coordinate) == CellType.COIN
             );
     }
 

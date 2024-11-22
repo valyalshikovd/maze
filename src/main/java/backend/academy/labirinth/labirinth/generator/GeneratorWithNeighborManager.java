@@ -1,6 +1,6 @@
 package backend.academy.labirinth.labirinth.generator;
 
-import backend.academy.labirinth.labirinth.Cell;
+import backend.academy.labirinth.labirinth.CellType;
 import backend.academy.labirinth.labirinth.Coordinate;
 import backend.academy.labirinth.labirinth.Maze;
 import backend.academy.labirinth.labirinth.generator.cellFactory.CellFactory;
@@ -21,7 +21,7 @@ public abstract class GeneratorWithNeighborManager {
     protected Coordinate output;
     protected final RandomShell random;
     protected List<Coordinate> activeCoords = new ArrayList<>();
-    protected final Cell[][] maze;
+    protected final CellType[][] maze;
     protected Maze actualMaze;
     protected final CellFactory cellFactory;
 
@@ -34,12 +34,12 @@ public abstract class GeneratorWithNeighborManager {
         this.output = output;
         this.random = random;
         this.cellFactory = cellFactory;
-        this.maze = new Cell[this.ySize][this.xSize];
+        this.maze = new CellType[this.ySize][this.xSize];
     }
 
     private boolean validateCoordsToPoolNeighbourCoords(Coordinate coord) {
         return Maze.isValidCoordinate(coord, ySize, xSize)
-            && !activeCoords.contains(coord) && maze[coord.y()][coord.x()].type() != Cell.Type.PASSAGE;
+            && !activeCoords.contains(coord) && maze[coord.y()][coord.x()] != CellType.PASSAGE;
     }
 
     private Coordinate getRandomNeighbourCoordinate(Coordinate coord) {

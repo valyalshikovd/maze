@@ -1,7 +1,7 @@
 package backend.academy.labirinth.labirinth.generator.RecursiveBacktrackerGenerator;
 
 
-import backend.academy.labirinth.labirinth.Cell;
+import backend.academy.labirinth.labirinth.CellType;
 import backend.academy.labirinth.labirinth.Coordinate;
 import backend.academy.labirinth.labirinth.Maze;
 import backend.academy.labirinth.labirinth.generator.GeneratorWithNeighborManager;
@@ -51,7 +51,7 @@ public class RecursiveBacktrackerGeneratorState extends GeneratorWithNeighborMan
         );
         currentCoord = new Coordinate(inputCoord.x(), inputCoord.y());
         this.cellFactory = cellFactory;
-        for (Cell[] cells : maze) {
+        for (CellType[] cells : maze) {
             Arrays.fill(cells, cellFactory.getWall());
         }
         maze[inputCoord.y()][inputCoord.x()] = cellFactory.getInput();
@@ -103,10 +103,10 @@ public class RecursiveBacktrackerGeneratorState extends GeneratorWithNeighborMan
             maze[currentCoord.y()][currentCoord.x()] = cellFactory.getPassageCell();
         }
 
-        Cell[][] cells = createNewCells();
+        CellType[][] cells = createNewCells();
 
         if (output != null) {
-            cells[output.y() + 1][output.x() + 1] = new Cell(Cell.Type.OUTPUT);
+            cells[output.y() + 1][output.x() + 1] = CellType.OUTPUT;
         }
 
         if (output == null) {
@@ -119,22 +119,22 @@ public class RecursiveBacktrackerGeneratorState extends GeneratorWithNeighborMan
         }
     }
 
-    private Cell[][] createNewCells() {
-        Cell[][] cells = new Cell[this.ySize + 2][this.xSize + 2];
+    private CellType[][] createNewCells() {
+        CellType[][] cells = new CellType[this.ySize + 2][this.xSize + 2];
 
         final int FIRST_CELL = 0;
 
         for (int j = 0; j < xSize + 2; j++) {
-            cells[FIRST_CELL][j] = new Cell(Cell.Type.WALL);
+            cells[FIRST_CELL][j] = CellType.WALL;
         }
         for (int j = 0; j < xSize + 2; j++) {
-            cells[ySize + 1][j] = new Cell(Cell.Type.WALL);
+            cells[ySize + 1][j] = CellType.WALL;
         }
         for (int j = 0; j < ySize + 2; j++) {
-            cells[j][FIRST_CELL] = new Cell(Cell.Type.WALL);
+            cells[j][FIRST_CELL] = CellType.WALL;
         }
         for (int j = 0; j < ySize + 2; j++) {
-            cells[j][xSize + 1] = new Cell(Cell.Type.WALL);
+            cells[j][xSize + 1] = CellType.WALL;
         }
         for (int i = 1; i < ySize + 1; i++) {
             if (xSize + 1 - 1 >= 0) {
@@ -187,10 +187,10 @@ public class RecursiveBacktrackerGeneratorState extends GeneratorWithNeighborMan
     private boolean validateCoordsToPoolNeighbourCoords(Coordinate coord) {
         return
             Maze.isValidCoordinate(coord, ySize, xSize)
-                && !activeCoords.contains(coord) && maze[coord.y()][coord.x()].type() != Cell.Type.PASSAGE
-                && maze[coord.y()][coord.x()].type() != Cell.Type.INPUT
-                && maze[coord.y()][coord.x()].type() != Cell.Type.COIN
-                && maze[coord.y()][coord.x()].type() != Cell.Type.SWAMP;
+                && !activeCoords.contains(coord) && maze[coord.y()][coord.x()] != CellType.PASSAGE
+                && maze[coord.y()][coord.x()] != CellType.INPUT
+                && maze[coord.y()][coord.x()] != CellType.COIN
+                && maze[coord.y()][coord.x()] != CellType.SWAMP;
     }
 
     @Override

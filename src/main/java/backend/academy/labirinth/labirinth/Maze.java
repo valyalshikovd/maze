@@ -16,7 +16,7 @@ public final class Maze {
     private final int height;
     @Getter
     private final int width;
-    private final Cell[][] grid;
+    private final CellType[][] grid;
     @Getter
     private final Coordinate startCoordinate;
     @Getter
@@ -27,10 +27,10 @@ public final class Maze {
         this.width = width;
         this.startCoordinate = startCoordinate;
         this.endCoordinate = endCoordinate;
-        grid = new Cell[height][width];
+        grid = new CellType[height][width];
     }
 
-    public Maze(Cell[][] grid, Coordinate startCoordinate, Coordinate endCoordinate) {
+    public Maze(CellType[][] grid, Coordinate startCoordinate, Coordinate endCoordinate) {
         this.height = grid.length;
         this.width = getGridWidth(grid);
         this.grid = grid;
@@ -38,10 +38,10 @@ public final class Maze {
         this.endCoordinate = endCoordinate;
     }
 
-    private int getGridWidth(Cell[][] grid) {
+    private int getGridWidth(CellType[][] grid) {
 
         int curr = grid[0].length;
-        for (Cell[] row : grid) {
+        for (CellType[] row : grid) {
             if (row.length != curr) {
                 throw new InvalidMaze("Not rectangle");
             }
@@ -49,29 +49,29 @@ public final class Maze {
         return curr;
     }
 
-    public void setCell(Coordinate coordinate, Cell cell) {
+    public void setCell(Coordinate coordinate, CellType cell) {
         if (!isValidCoordinate(coordinate)) {
             throw new InvalidCoordinate("invalid coordinate");
         }
         grid[coordinate.y()][coordinate.x()] = cell;
     }
 
-    public Cell[][] getGrid() {
-        Cell[][] res = new Cell[height][];
+    public CellType[][] getGrid() {
+        CellType[][] res = new CellType[height][];
         for (int i = 0; i < height; i++) {
             res[i] = Arrays.copyOf(grid[i], grid[i].length);
         }
         return res;
     }
 
-    public Cell getCell(Coordinate coordinate) {
+    public CellType getCell(Coordinate coordinate) {
         if (!isValidCoordinate(coordinate)) {
             throw new InvalidCoordinate("invalid coordinate");
         }
         return grid[coordinate.y()][coordinate.x()];
     }
 
-    public Cell getCell(int x, int y) {
+    public CellType getCell(int x, int y) {
         if (!isValidCoordinate(new Coordinate(x, y))) {
             throw new InvalidCoordinate("invalid coordinate");
         }

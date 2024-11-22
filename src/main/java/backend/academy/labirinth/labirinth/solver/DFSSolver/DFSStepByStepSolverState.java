@@ -1,6 +1,6 @@
 package backend.academy.labirinth.labirinth.solver.DFSSolver;
 
-import backend.academy.labirinth.labirinth.Cell;
+import backend.academy.labirinth.labirinth.CellType;
 import backend.academy.labirinth.labirinth.Coordinate;
 import backend.academy.labirinth.labirinth.Maze;
 import backend.academy.labirinth.labirinth.solver.StepByStepSolver;
@@ -116,7 +116,7 @@ public class DFSStepByStepSolverState implements StepByStepSolver {
 
     private void addToCords(List<Coordinate> coordinates, Coordinate coord) {
         if (validateCoord(coord)) {
-            if (maze.getCell(coord).type() == Cell.Type.OUTPUT) {
+            if (maze.getCell(coord) == CellType.OUTPUT) {
                 flag = false;
             }
             coordinates.add(coord);
@@ -126,10 +126,10 @@ public class DFSStepByStepSolverState implements StepByStepSolver {
     private boolean validateCoord(Coordinate coordinate) {
         return
             maze.isValidCoordinate(coordinate)
-                && (maze.getCell(coordinate).type() == Cell.Type.PASSAGE
-                || maze.getCell(coordinate).type() == Cell.Type.OUTPUT
-                || maze.getCell(coordinate).type() == Cell.Type.SWAMP
-                || maze.getCell(coordinate).type() == Cell.Type.COIN
+                && (maze.getCell(coordinate) == CellType.PASSAGE
+                || maze.getCell(coordinate) == CellType.OUTPUT
+                || maze.getCell(coordinate) == CellType.SWAMP
+                || maze.getCell(coordinate) == CellType.COIN
             )
                 && !visitedCoords.contains(coordinate);
     }

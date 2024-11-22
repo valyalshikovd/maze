@@ -1,6 +1,6 @@
 package backend.academy.labirinth.labirinth.wallDestroyer;
 
-import backend.academy.labirinth.labirinth.Cell;
+import backend.academy.labirinth.labirinth.CellType;
 import backend.academy.labirinth.labirinth.Maze;
 import backend.academy.labirinth.labirinth.generator.cellFactory.CellFactory;
 import backend.academy.labirinth.util.RandomShell;
@@ -12,7 +12,7 @@ public final class WallDestroyer {
 
     public static Maze destroyWalls(Maze maze) {
 
-        Cell[][] cells = maze.getGrid();
+        CellType[][] cells = maze.getGrid();
 
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[i].length; j++) {
@@ -29,7 +29,7 @@ public final class WallDestroyer {
     }
 
     private static void checkNeigbours(
-        Cell[][] cells,
+        CellType[][] cells,
         int i,
         int j,
         RandomShell randomShell,
@@ -101,18 +101,18 @@ public final class WallDestroyer {
         }
     }
 
-    private static boolean checkNeighbourWalls(Cell[][] cells, int i, int j) {
+    private static boolean checkNeighbourWalls(CellType[][] cells, int i, int j) {
             return cells[i][j] != null
-            && cells[i][j].type() == Cell.Type.WALL;
+            && cells[i][j] == CellType.WALL;
     }
 
 
-    private static boolean validType(Cell cell) {
+    private static boolean validType(CellType cell) {
         return
-            cell.type() == Cell.Type.PASSAGE
-            || cell.type() == Cell.Type.COIN
-            || cell.type() == Cell.Type.SWAMP
-            || cell.type() == Cell.Type.OUTPUT;
+            cell == CellType.PASSAGE
+            || cell == CellType.COIN
+            || cell == CellType.SWAMP
+            || cell == CellType.OUTPUT;
     }
 
     private WallDestroyer() {

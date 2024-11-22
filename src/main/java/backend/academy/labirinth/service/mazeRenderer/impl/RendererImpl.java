@@ -1,6 +1,6 @@
 package backend.academy.labirinth.service.mazeRenderer.impl;
 
-import backend.academy.labirinth.labirinth.Cell;
+import backend.academy.labirinth.labirinth.CellType;
 import backend.academy.labirinth.labirinth.Coordinate;
 import backend.academy.labirinth.labirinth.Maze;
 import backend.academy.labirinth.service.mazeRenderer.Renderer;
@@ -20,27 +20,27 @@ public class RendererImpl implements Renderer {
 
     @Override
     public String render(Maze maze, List<Coordinate> path) {
-        Cell[][] cells = maze.getGrid();
+        CellType[][] cells = maze.getGrid();
         cells = injectPathInMaze(cells, path);
         return getStringMaze(cells);
     }
 
-    private Cell[][] injectPathInMaze(Cell[][] src, List<Coordinate> path) {
-        Cell[][] res = Arrays.copyOf(src, src.length);
+    private CellType[][] injectPathInMaze(CellType[][] src, List<Coordinate> path) {
+        CellType[][] res = Arrays.copyOf(src, src.length);
         for (Coordinate c : path) {
-            if (res[c.y()][c.x()].type() == Cell.Type.INPUT) {
+            if (res[c.y()][c.x()] == CellType.INPUT) {
                 continue;
             }
-            res[c.y()][c.x()] = new Cell(Cell.Type.WAY);
+            res[c.y()][c.x()] = CellType.WAY;
         }
         return res;
     }
 
-    private String getStringMaze(Cell[][] cells) {
+    private String getStringMaze(CellType[][] cells) {
         StringBuilder sb = new StringBuilder();
-        for (Cell[] c : cells) {
-            for (Cell cell : c) {
-                    sb.append(cell.type().value());
+        for (CellType[] c : cells) {
+            for (CellType cell : c) {
+                    sb.append(cell.value());
             }
             sb.append('\n');
         }
@@ -53,11 +53,11 @@ public class RendererImpl implements Renderer {
      */
     public String getCodeMaze(Maze maze) {
         StringBuilder sb = new StringBuilder();
-        sb.append("new Cell[][]{");
-        for (Cell[] c : maze.getGrid()) {
-            sb.append("new Cell[]{");
-            for (Cell cell : c) {
-                sb.append("new Cell(Cell.Type." + cell.type() + "),");
+        sb.append("new CellType[][]{");
+        for (CellType[] c : maze.getGrid()) {
+            sb.append("new CellType[]{");
+            for (CellType cell : c) {
+                sb.append("(CellType.").append(cell).append("),");
             }
             sb.append("},");
         }

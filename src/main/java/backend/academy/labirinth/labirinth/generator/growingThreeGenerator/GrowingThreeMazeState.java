@@ -1,6 +1,6 @@
 package backend.academy.labirinth.labirinth.generator.growingThreeGenerator;
 
-import backend.academy.labirinth.labirinth.Cell;
+import backend.academy.labirinth.labirinth.CellType;
 import backend.academy.labirinth.labirinth.Coordinate;
 import backend.academy.labirinth.labirinth.Maze;
 import backend.academy.labirinth.labirinth.generator.GeneratorWithNeighborManager;
@@ -34,7 +34,7 @@ public final class GrowingThreeMazeState extends GeneratorWithNeighborManager {
 
     public Maze generateMaze() {
 
-        for (Cell[] cells : maze) {
+        for (CellType[] cells : maze) {
             Arrays.fill(cells, cellFactory.getWall());
         }
 
@@ -60,7 +60,7 @@ public final class GrowingThreeMazeState extends GeneratorWithNeighborManager {
         }
 
 
-        Cell[][] cells =  new Cell[ySize + 2][xSize + 2];
+        CellType[][] cells =  new CellType[ySize + 2][xSize + 2];
 
         for (int j = 0; j < xSize + 2; j++) {
             cells[0][j] = cellFactory.getWall();

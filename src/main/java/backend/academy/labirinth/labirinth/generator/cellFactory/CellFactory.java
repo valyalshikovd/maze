@@ -1,14 +1,14 @@
 package backend.academy.labirinth.labirinth.generator.cellFactory;
 
-import backend.academy.labirinth.labirinth.Cell;
+import backend.academy.labirinth.labirinth.CellType;
 
 public interface CellFactory {
 
-    Cell getPassageCell();
+    CellType getPassageCell();
 
-    Cell getOutput();
+    CellType getOutput();
 
-    Cell getInput();
+    CellType getInput();
 
-    Cell getWall();
+    CellType getWall();
 }

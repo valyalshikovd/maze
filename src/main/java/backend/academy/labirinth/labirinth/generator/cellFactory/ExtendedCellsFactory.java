@@ -1,7 +1,7 @@
 package backend.academy.labirinth.labirinth.generator.cellFactory;
 
 import backend.academy.labirinth.config.Config;
-import backend.academy.labirinth.labirinth.Cell;
+import backend.academy.labirinth.labirinth.CellType;
 import backend.academy.labirinth.util.RandomShell;
 import jakarta.inject.Inject;
 
@@ -14,7 +14,7 @@ public class ExtendedCellsFactory implements CellFactory {
     private final RandomShell random;
 
     private int count = 0;
-    private Cell.Type currentType;
+    private CellType currentType;
 
     @Inject
     public ExtendedCellsFactory(RandomShell random) {
@@ -22,10 +22,10 @@ public class ExtendedCellsFactory implements CellFactory {
     }
 
     @Override
-    public Cell getPassageCell() {
+    public CellType getPassageCell() {
         setType();
         count -= 1;
-        return new Cell(currentType);
+        return currentType;
     }
 
     private void setType() {
@@ -33,15 +33,15 @@ public class ExtendedCellsFactory implements CellFactory {
             int type = random.get(Config.COUNT_OF_SURFACES);
             switch (type) {
                 case 0:
-                    currentType = Cell.Type.PASSAGE;
+                    currentType = CellType.PASSAGE;
                     count = random.get(10);
                     break;
                 case 1:
-                    currentType = Cell.Type.COIN;
+                    currentType = CellType.COIN;
                     count = 1;
                     break;
                 case 2:
-                    currentType = Cell.Type.SWAMP;
+                    currentType = CellType.SWAMP;
                     count = random.get(8);
                     break;
                 default:
@@ -51,17 +51,17 @@ public class ExtendedCellsFactory implements CellFactory {
     }
 
     @Override
-    public Cell getOutput() {
-        return new Cell(Cell.Type.OUTPUT);
+    public CellType getOutput() {
+        return CellType.OUTPUT;
     }
 
     @Override
-    public Cell getInput() {
-        return new Cell(Cell.Type.INPUT);
+    public CellType getInput() {
+        return CellType.INPUT;
     }
 
     @Override
-    public Cell getWall() {
-        return new Cell(Cell.Type.WALL);
+    public CellType getWall() {
+        return CellType.WALL;
     }
 }
