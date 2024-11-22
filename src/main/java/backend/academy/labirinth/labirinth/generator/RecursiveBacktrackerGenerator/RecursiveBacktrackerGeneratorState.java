@@ -185,9 +185,7 @@ public class RecursiveBacktrackerGeneratorState extends GeneratorWithNeighborMan
         return
             Maze.isValidCoordinate(coord, ySize, xSize)
                 && !activeCoords.contains(coord) && maze[coord.y()][coord.x()] != CellType.PASSAGE
-                && maze[coord.y()][coord.x()] != CellType.INPUT
-                && maze[coord.y()][coord.x()] != CellType.COIN
-                && maze[coord.y()][coord.x()] != CellType.SWAMP;
+                && maze[coord.y()][coord.x()] == CellType.WALL;
     }
 
     @Override
