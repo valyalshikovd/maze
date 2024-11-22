@@ -28,13 +28,20 @@ public abstract class GeneratorWithNeighborManager {
     protected GeneratorWithNeighborManager(int ySize,
         int xSize, Coordinate input, Coordinate output, RandomShell random, CellFactory cellFactory
     ) {
-        this.ySize = ySize;
-        this.xSize = xSize;
+        this.ySize = reductionToPositive(ySize);
+        this.xSize = reductionToPositive(xSize);
         this.input = input;
         this.output = output;
         this.random = random;
         this.cellFactory = cellFactory;
         this.maze = new CellType[this.ySize][this.xSize];
+    }
+
+    private int reductionToPositive(int num) {
+        if (num <= 0) {
+            return  1;
+        }
+        return num;
     }
 
     private boolean validateCoordsToPoolNeighbourCoords(Coordinate coord) {

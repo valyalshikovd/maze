@@ -1,6 +1,5 @@
 package backend.academy.labirinth.labirinth.generator.RecursiveBacktrackerGenerator;
 
-
 import backend.academy.labirinth.labirinth.CellType;
 import backend.academy.labirinth.labirinth.Coordinate;
 import backend.academy.labirinth.labirinth.Maze;
@@ -84,7 +83,7 @@ public class RecursiveBacktrackerGeneratorState extends GeneratorWithNeighborMan
             }
             currentCoord = coordinate;
         }
-        if (coordinate == null &&  !iterations.isEmpty()) {
+        if (coordinate == null && !iterations.isEmpty()) {
 
             Iteration iter = iterations.pop();
             while (!validateCoordsToPoolNeighbourCoords(iter.nextCoord)) {
@@ -94,8 +93,8 @@ public class RecursiveBacktrackerGeneratorState extends GeneratorWithNeighborMan
                 }
                 iter = iterations.pop();
             }
-                breakWalls(iter.currentCoord, iter.nextCoord);
-                currentCoord = iter.nextCoord;
+            breakWalls(iter.currentCoord, iter.nextCoord);
+            currentCoord = iter.nextCoord;
 
         }
         if (currentCoord != null && validateCoordsToPoolNeighbourCoords(currentCoord)) {
@@ -137,9 +136,7 @@ public class RecursiveBacktrackerGeneratorState extends GeneratorWithNeighborMan
             cells[j][xSize + 1] = CellType.WALL;
         }
         for (int i = 1; i < ySize + 1; i++) {
-            if (xSize + 1 - 1 >= 0) {
-                System.arraycopy(maze[i - 1], 0, cells[i], 1, xSize);
-            }
+            System.arraycopy(maze[i - 1], 0, cells[i], 1, xSize);
         }
         return cells;
     }
@@ -154,7 +151,7 @@ public class RecursiveBacktrackerGeneratorState extends GeneratorWithNeighborMan
             activeCoords.add(new Coordinate(source.x(), source.y() - 1));
         }
         if (target.x() > source.x()) {
-            maze[source.y()][source.x()  + 1] = cellFactory.getPassageCell();
+            maze[source.y()][source.x() + 1] = cellFactory.getPassageCell();
             activeCoords.add(new Coordinate(source.x() + 1, source.y() + 1));
         }
         if (target.x() < source.x()) {
