@@ -13,7 +13,7 @@ import backend.academy.labirinth.labirinth.solver.DFSSolver.DFSSolver;
 import backend.academy.labirinth.labirinth.solver.Solver;
 import backend.academy.labirinth.labirinth.solver.dijkstrasAlgorithmSolver.DijkstrasAlgorithmSolver;
 import backend.academy.labirinth.service.ConsoleInputService;
-import backend.academy.labirinth.service.OutputService;
+import backend.academy.labirinth.service.UserInteractionService;
 import backend.academy.labirinth.service.mazeRenderer.Renderer;
 import backend.academy.labirinth.service.output.PrintWriteShell;
 import backend.academy.labirinth.util.juice.ObjectFabric;
@@ -25,14 +25,14 @@ import org.apache.commons.math3.util.Pair;
 
 @SuppressWarnings({"MultipleStringLiterals", "MagicNumber"})
 @SuppressFBWarnings("FCCD_FIND_CLASS_CIRCULAR_DEPENDENCY")
-public class OutputServiceImpl implements OutputService {
+public class UserInteractionServiceImpl implements UserInteractionService {
 
     private final Renderer renderer;
     private final ConsoleInputService consoleInputService;
 
 
     @Inject
-    public OutputServiceImpl(Renderer renderer, ConsoleInputService consoleInputService) {
+    public UserInteractionServiceImpl(Renderer renderer, ConsoleInputService consoleInputService) {
         this.renderer = renderer;
         this.consoleInputService = consoleInputService;
     }

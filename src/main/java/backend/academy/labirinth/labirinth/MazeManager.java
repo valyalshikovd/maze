@@ -1,6 +1,6 @@
 package backend.academy.labirinth.labirinth;
 
-import backend.academy.labirinth.service.OutputService;
+import backend.academy.labirinth.service.UserInteractionService;
 import backend.academy.labirinth.util.juice.ObjectFabric;
 import com.google.inject.Inject;
 import org.apache.commons.math3.util.Pair;
@@ -11,10 +11,10 @@ import org.apache.commons.math3.util.Pair;
 @SuppressWarnings("MultipleStringLiterals")
 public final class MazeManager {
 
-    private final OutputService outputService;
+    private final UserInteractionService outputService;
 
     @Inject
-    private MazeManager(OutputService outputService) {
+    private MazeManager(UserInteractionService outputService) {
         this.outputService = outputService;
     }
 

@@ -6,7 +6,7 @@ import backend.academy.labirinth.labirinth.Maze;
 import java.util.List;
 import org.apache.commons.math3.util.Pair;
 
-public interface OutputService {
+public interface UserInteractionService {
 
     void drawMaze(Maze maze);
 

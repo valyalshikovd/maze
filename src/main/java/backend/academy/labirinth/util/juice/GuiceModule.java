@@ -7,9 +7,9 @@ import backend.academy.labirinth.labirinth.generator.cellFactory.ExtendedCellsFa
 import backend.academy.labirinth.labirinth.solver.DFSSolver.DFSSolver;
 import backend.academy.labirinth.labirinth.solver.Solver;
 import backend.academy.labirinth.service.ConsoleInputService;
-import backend.academy.labirinth.service.OutputService;
+import backend.academy.labirinth.service.UserInteractionService;
 import backend.academy.labirinth.service.impl.ConsoleInputServiceImpl;
-import backend.academy.labirinth.service.impl.OutputServiceImpl;
+import backend.academy.labirinth.service.impl.UserInteractionServiceImpl;
 import backend.academy.labirinth.service.input.BufferedReaderShell;
 import backend.academy.labirinth.service.input.BufferedReaderShellImpl;
 import backend.academy.labirinth.service.mazeRenderer.Renderer;
@@ -26,7 +26,7 @@ public class GuiceModule extends AbstractModule {
     protected void configure() {
         bind(RandomShell.class).to(RandomShellImpl.class).in(Scopes.SINGLETON);
         bind(Renderer.class).to(RendererImpl.class).in(Scopes.SINGLETON);
-        bind(OutputService.class).to(OutputServiceImpl.class).in(Scopes.SINGLETON);
+        bind(UserInteractionService.class).to(UserInteractionServiceImpl.class).in(Scopes.SINGLETON);
         bind(ConsoleInputService.class).to(ConsoleInputServiceImpl.class).in(Scopes.SINGLETON);
         //bind(Generator.class).to(GrowingThreeMazeGenerator.class).in(Scopes.SINGLETON);
         bind(BufferedReaderShell.class).to(BufferedReaderShellImpl.class).in(Scopes.SINGLETON);
