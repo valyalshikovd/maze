@@ -8,6 +8,7 @@ import backend.academy.labirinth.labirinth.solver.Solver;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.PriorityQueue;
 
@@ -18,6 +19,8 @@ public class DijkstrasAlgorithmSolver implements Solver {
 
     @Override
     public List<Coordinate> solve(Maze maze) {
+
+        var visited = new HashSet<Coordinate>();
 
         int height = maze.height();
         int width = maze.width();
@@ -49,9 +52,11 @@ public class DijkstrasAlgorithmSolver implements Solver {
 
                 Coordinate neighbor = direction.getShiftedCoordinate(currentCoordinate);
 
-                if (!validateCoord(neighbor, maze)) {
+                if (!validateCoord(neighbor, maze) || visited.contains(neighbor)) {
                     continue;
                 }
+
+                visited.add(neighbor);
 
                 int newDist =
                     dist[currentCoordinate.y()][currentCoordinate.x()]
